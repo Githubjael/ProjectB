@@ -1,5 +1,3 @@
-using System;
-
 public class Program
 {
     public static void Main()
@@ -20,18 +18,25 @@ public class Program
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("Implement making of reservation");
+                    Console.WriteLine("What is going to be the name of the reservation?");
+                    string userName = Console.ReadLine();
+                    Reservations reservation = new Reservations(userName);
+                    reservation.MakeReservation();
                     break;
+
                 case "2":
                     Console.WriteLine("Implement cancelling the reservation");
                     break;
+
                 case "3":
                     Console.WriteLine("Show the menu");
                     break;
+
                 case "4":
                     Console.WriteLine("Exited the program");
                     exit = true;  
                     break;
+
                 default:
                     Console.WriteLine("Invalid choice. Please choose a number between 1 and 4");
                     break;
