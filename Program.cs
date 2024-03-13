@@ -37,9 +37,9 @@ public class Program
 
                 case "2":
                     Console.WriteLine("On what day would you like to cancel the reservation?");
-                    string userDate = Console.ReadLine();
+                    string reservationDate = Console.ReadLine();
                     Console.WriteLine("What is the name of the reservation?");
-                    string userNameForCancel = Console.ReadLine();
+                    string reservationName = Console.ReadLine();
                     //remove the reservation on that day with that name from the place where its saved
 
 
