@@ -41,6 +41,22 @@ public class Program
                     Console.WriteLine("Invalid choice. Please choose a number between 1 and 4");
                     break;
             }
+
+
+            private static void MakeReservation()
+            {
+                Console.Write("Voer de gewenste datum en tijd in (bijv. '2024-03-15 19:00'): ");
+                string inputDateTime = Console.ReadLine();
+        
+                if ()
+                {
+        
+                }
+                else
+                {
+                    Console.WriteLine("Ongeldige datum- en tijdnotatie. Probeer opnieuw.");
+                }
+            }
         }
     }
 }
