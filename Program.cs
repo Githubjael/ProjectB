@@ -28,7 +28,9 @@ public class Program
                     string reservationTime = Console.ReadLine();
                     //check if valid time, so good format and during opening time on that day
                     //if not, ask question again
-                    Reservation reservation = new Reservation(reservationName, reservationDate, reservationTime);
+                    System.Console.WriteLine("How many people are in your party?");
+                    int sizeParty = Convert.ToInt32(Console.ReadLine());
+                    Reservation reservation = new Reservation(reservationName, reservationDate, reservationTime, sizeParty);
                     reservation.MakeReservation();
                     break;
 
