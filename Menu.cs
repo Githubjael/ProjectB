@@ -1,11 +1,11 @@
 public class Menu{
-    public string Name;
+    public string MenuItem;
     public double Price;
 
 
-    public Menu(string name, double price)
+    public Menu(string menuItem, double price)
     {
-        Name = name;
+        MenuItem = menuItem;
         Price = price;
     }
 }
