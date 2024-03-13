@@ -12,14 +12,37 @@ public class Reservation{
         SizeParty = sizeParty;
     }
 
-    public void MakeReservation(){
-        System.Console.WriteLine("Succesfully made the reservation!");
-        //save it somewhere
-        //round sizeparty up to 2, 4 or 6
-        //if higher make it into multible reservations
-        //for example if sizeparty is 10 table is 6 and 4
-        //if sizeparty is 11 table is 6 and 6
-
+    public void MakeReservation()
+    {
+    
+        List<int> availableDays = new List<int>();
+    
+    
+        Console.WriteLine("How many people are you coming with?");
+        int guessAmount = Convert.ToInt32(Console.ReadLine());
+    
+    
+        Console.WriteLine("What month would you like to come?");
+        string monthChoice = Console.ReadLine();
+    
+    
+        Console.WriteLine($"These are the avalaible days in {monthChoice} for a reservation with {guessAmount} people:");
+        Console.WriteLine(availableDays);
+    
+        Console.WriteLine("What day would you like to come?");
+        int dayChoice = Convert.ToInt32(Console.ReadLine());
+    
+        Console.WriteLine("These are the available times to reservate a table on your chosen day:");
+        Console.WriteLine("available days implemented");
+    
+        Console.WriteLine("Chooce a tijdstip:");
+        string timeChoice = Console.ReadLine();
+    
+        Console.WriteLine("Do you confirm the reservation with the chosen date? y/n");
+        string reservationConfirmation = Console.ReadLine();
+    
+    
+    }
 
     }
 }
