@@ -43,19 +43,7 @@ public class Program
             }
 
 
-            private static void MakeReservation()
-            {
-                Console.Write("Voer de gewenste datum en tijd in (bijv. '2024-03-15 19:00'): ");
-                string inputDateTime = Console.ReadLine();
-        
-                if ()
-                {
-        
-                }
-                else
-                {
-                    Console.WriteLine("Ongeldige datum- en tijdnotatie. Probeer opnieuw.");
-                }
+
             }
         }
     }
