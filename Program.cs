@@ -20,6 +20,7 @@ public class Program
                 case "1":
                     Console.WriteLine("What is going to be the name of the reservation?");
                     string reservationName = Console.ReadLine();
+                    //check if valid name, so no numbers and other symbols (maybe max length?)
                     System.Console.WriteLine("On what day would you like to make a reservation?");
                     string reservationDate = Console.ReadLine();
                     //check if valid date, so in future and good format and on a day resto is open
