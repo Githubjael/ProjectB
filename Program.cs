@@ -19,13 +19,27 @@ public class Program
             {
                 case "1":
                     Console.WriteLine("What is going to be the name of the reservation?");
-                    string userName = Console.ReadLine();
-                    Reservations reservation = new Reservations(userName);
+                    string reservationName = Console.ReadLine();
+                    System.Console.WriteLine("On what day would you like to make a reservation?");
+                    string reservationDate = Console.ReadLine();
+                    //check if valid date, so in future and good format and on a day resto is open
+                    //if not, ask question again
+                    System.Console.WriteLine("At what time would you like to make the reservation?");
+                    string reservationTime = Console.ReadLine();
+                    //check if valid time, so good format and during opening time on that day
+                    //if not, ask question again
+                    Reservation reservation = new Reservation(reservationName, reservationDate, reservationTime);
                     reservation.MakeReservation();
                     break;
 
                 case "2":
-                    Console.WriteLine("Implement cancelling the reservation");
+                    Console.WriteLine("On what day would you like to cancel the reservation?");
+                    string userDate = Console.ReadLine();
+                    Console.WriteLine("What is the name of the reservation?");
+                    string userNameForCancel = Console.ReadLine();
+                    //remove the reservation on that day with that name from the place where its saved
+
+
                     break;
 
                 case "3":
@@ -40,10 +54,6 @@ public class Program
                 default:
                     Console.WriteLine("Invalid choice. Please choose a number between 1 and 4");
                     break;
-            }
-
-
-
             }
         }
     }
