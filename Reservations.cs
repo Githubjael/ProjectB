@@ -1,3 +1,5 @@
+private static Dictionary<DateTime, string> reservations = new Dictionary<DateTime, string>();
+
 public class Reservations{
     public string Name;
 
