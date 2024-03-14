@@ -9,53 +9,27 @@ public class Program
         while (!exit)
         {
             Console.WriteLine("[1] Make a reservation");
-            Console.WriteLine("[2] Cancel a reservation");
-            Console.WriteLine("[3] View the menu");
-            Console.WriteLine("[4] Exit");
+            Console.WriteLine("[2] View the menu");
+            Console.WriteLine("[3] Exit");
             Console.Write("Enter your choice: ");
             string choice = Console.ReadLine();
 
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("What is going to be the name of the reservation?");
-                    string reservationName = Console.ReadLine();
-                    //check if valid name, so no numbers and other symbols (maybe max length?)
-                    System.Console.WriteLine("On what day would you like to make a reservation?");
-                    string reservationDate = Console.ReadLine();
-                    //check if valid date, so in future and good format and on a day resto is open
-                    //if not, ask question again
-                    System.Console.WriteLine("At what time would you like to make the reservation?");
-                    string reservationTime = Console.ReadLine();
-                    //check if valid time, so good format and during opening time on that day
-                    //if not, ask question again
-                    System.Console.WriteLine("How many people are in your party?");
-                    int sizeParty = Convert.ToInt32(Console.ReadLine());
-                    Reservation reservation = new Reservation(reservationName, reservationDate, reservationTime, sizeParty);
-                    reservation.MakeReservation();
                     break;
 
                 case "2":
-                    Console.WriteLine("On what day would you like to cancel the reservation?");
-                    string reservationDate = Console.ReadLine();
-                    Console.WriteLine("What is the name of the reservation?");
-                    string reservationName = Console.ReadLine();
-                    //remove the reservation on that day with that name from the place where its saved
-
-
-                    break;
-
-                case "3":
                     Console.WriteLine("Show the menu");
                     break;
 
-                case "4":
+                case "3":
                     Console.WriteLine("Exited the program");
                     exit = true;  
                     break;
 
                 default:
-                    Console.WriteLine("Invalid choice. Please choose a number between 1 and 4");
+                    Console.WriteLine("Invalid choice. Please choose a number between 1 and 3");
                     break;
             }
         }
