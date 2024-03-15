@@ -62,10 +62,7 @@ class Reservation
 
     public static void Main()
     {
-        // een simpele object van de reservatie class voor nu
-        Reservation reservation = new Reservation();
-        reservation.MakeReservation();
-
+        MakeReservation();
     } 
 
     
