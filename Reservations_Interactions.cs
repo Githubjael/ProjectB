@@ -10,13 +10,22 @@ class Reservation
 
 
     
+
+    public static List<int> unavailableIDs = new List<int>(); // ik maak een lijst om de ids die bezet zijn opteslaan.
+
     public static int GenerateRandomID()
     {
-        // random object aanmaken
         Random random = new Random();
+        int guestID;
 
-        // random id maken voor de guest, voor nu ff simpel houden en een range van 15 ids gebruiken.
-        int guestID = random.Next(15); 
+        // ik maak een loop om een nieuwe id te krijgen totdat er een unique id is die niet in mijn 'gebruikte ids lijst' zit.
+        do
+        {
+            guestID = random.Next(20); // random ID , voor nu ff 20 ids , kan nog veranderen
+        } while (unavailableIDs.Contains(guestID)); // zolang die id in de  gebruikte lijst zit blijft het doorgaan.
+
+        // de gebruikte ids voeg ik toe aan de lijst.
+        unavailableIDs.Add(guestID);
 
         return guestID;
     }
