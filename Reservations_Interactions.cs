@@ -7,6 +7,21 @@ class Reservation
      22, 23, 24, 25, 26, 27, 28,
      29, 30, 31};
     public static new List<string> AvailableHours = new List<string>(){"10:00", "10:30", "17:00", "18:00", "19:30", "20:00"};
+
+
+    
+    public static int GenerateRandomID()
+    {
+        // random object aanmaken
+        Random random = new Random();
+
+        // random id maken voor de guest, voor nu ff simpel houden en een range van 15 ids gebruiken.
+        int guestID = random.Next(15); 
+
+        return guestID;
+    }
+
+    
     public static void MakeReservation(){
         // Vraag de user met hoeveel personen die gaat komen
         Console.WriteLine("How many people are coming with you?");
@@ -36,9 +51,23 @@ class Reservation
         System.Console.WriteLine("What is your Email?");
         string Email = Console.ReadLine();
 
+        // vervolgens geven we de user een guestID voor zijn reservering, d.m.v. een randomgenerator.
+        int guestID = GenerateRandomID();
+
         // Later gaan we de user vragen om de reservering te  bevestigen maar voor nu even dit:
-        System.Console.WriteLine("Your reservation is confirmed. Your table ID = {RandomID}.\nThank you for choosing our restaurant, we look forward to serve you!");
+        System.Console.WriteLine($"Your reservation is confirmed. Your table ID = {guestID}.\nThank you for choosing our restaurant, we look forward to serve you!");
         // Hierna maken we een Reservation object aan met alle details van de reservation en stoppen we die in json
     }
+
+
+    public static void Main()
+    {
+        // een simpele object van de reservatie class voor nu
+        Reservation reservation = new Reservation();
+        reservation.MakeReservation();
+
+    } 
+
+    
 }
 
