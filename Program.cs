@@ -17,6 +17,12 @@ public class Program
             switch (choice)
             {
                 case "1":
+                    Reservation.MakeReservation();
+                    foreach(var kvp in Reservation.tableAssignments)
+                    {
+                        // ik display even alle guestsIDS and table ids die bezet zijn // gwn een overzicht voor ons & omte checken of het werkt.
+                        Console.WriteLine($"GuestID: {kvp.Key}, TableID: {kvp.Value}");
+                    }
                     break;
 
                 case "2":
