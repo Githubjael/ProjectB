@@ -1,6 +1,9 @@
 
+// Deze bestand is de Interactie/Presentatie laag
 public class Reservation
 {
+    // Maandenlijst, later gaat elke maand zn lijst krijgen
+    // Elke x wanneer een dag vol is, dan gaat de nummer van die dag uit de lijst.
     public static List<int> Month = new List<int>()
     {
         1, 2, 3, 4, 5, 6, 7,
@@ -9,26 +12,18 @@ public class Reservation
         22, 23, 24, 25, 26, 27, 28,
         29, 30, 31
     };
-    
+    // Zelfde geld voor AvailableHours, elke dag zal zijn eigen lijst hebben
     public static List<string> AvailableHours = new List<string>()
     {
         "10:00", "10:30", "17:00", "18:00", "19:30", "20:00"
     };
 
-
-
-
-
     public static List<int> unavailableTableIDs = new List<int>(); // als eerst maak ik een lijst om de gebruikte tafel IDs later op te slaan
     
     public static List<int> unavailableGuestIDs = new List<int>(); // ook maak ik een lijst om de gebruikte Guests IDs op te slaan
 
-    public static Dictionary<int, int> tableAssignments = new Dictionary<int, int>(); // daarna maak ik een dictionary om de gastenIDSs te koppelen aan tafelIDs
+    public static Dictionary<int, int> tableAssignments = new Dictionary<int, int>(); // daarna maak ik een dictionary om de gastenIDSs te koppelen aan tafelIDs   
 
-
-
-
-    
     public static int GenerateRandomGuestID()
     {
         Random random = new Random();
@@ -45,9 +40,6 @@ public class Reservation
 
         return guestID;
     }
-
-
-
         public static int GenerateRandomTableID()
     {
         Random random = new Random();
@@ -64,11 +56,6 @@ public class Reservation
 
         return tableID;
     }
-
-
-
-
-
     public static void MakeReservation()
     {
         // vraag de gebruiker met hoeveel personen hij/zij komt
@@ -104,18 +91,12 @@ public class Reservation
         // ik koppel de guest and table ids in mijn dictionarie
         tableAssignments.Add(guestID, tableID);
 
+        // We maken een object van de Reservering om in een lijst te dumpen om naar json te sturen
+        ReservationDataModel Reservation = new ReservationDataModel(guestID, tableID, $"{chosenDay}/{numberOfMonth}/2024 {chosenTime}", email, phoneNumber);
+        ReservationLogic.AddReservationToList(Reservation);
+
         // bevestig de reservering aan de gebruiker
         Console.WriteLine($"Your reservation is confirmed. Your table number = {tableID}.\nThank you for choosing our restaurant, we look forward to serving you!");
     }
 
-    public static void Main()
-    {
-        MakeReservation();
-
-        foreach(var kvp in tableAssignments)
-        {
-            // ik display even alle guestsIDS and table ids die bezet zijn // gwn een overzicht voor ons & omte checken of het werkt.
-            Console.WriteLine($"GuestID: {kvp.Key}, TableID: {kvp.Value}");
-        }
-    }
 }
