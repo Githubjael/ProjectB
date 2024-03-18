@@ -10,8 +10,4 @@ public class RestaurantInfo{
         this.Phone_number = phone_number;
     }
 
-    public string GetInfo(){
-        string resto_info = $"Adress: {Adress}\nEmail: {Email}\nPhone number: {Phone_number}";
-        return resto_info;
-    }
 }
