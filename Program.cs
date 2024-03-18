@@ -7,7 +7,7 @@ public class Program
         
         bool exit = false;
         //info abt restaurant, can be changed by manager
-        RestaurantInfo resto1 = new RestaurantInfo("Wijnhaven 107", "email", 06372382);
+        RestaurantInfo resto1 = new RestaurantInfo("Wijnhaven 107\n 3011 WN Rotterdam", "email", "06372382");
 
         while (!exit)
         {
@@ -22,12 +22,12 @@ public class Program
             switch (choice)
             {
                 case "1":
-                     Reservation.MakeReservation();
-                     foreach(var kvp in Reservation.tableAssignments)
-                     {
-                         // ik display even alle guestsIDS and table ids die bezet zijn // gwn een overzicht voor ons & omte checken of het werkt.
-                         Console.WriteLine($"GuestID: {kvp.Key}, TableID: {kvp.Value}");
-                     }
+                    Reservation.MakeReservation();
+                    foreach(var kvp in Reservation.tableAssignments)
+                    {
+                        // ik display even alle guestsIDS and table ids die bezet zijn // gwn een overzicht voor ons & omte checken of het werkt.
+                        Console.WriteLine($"GuestID: {kvp.Key}, TableID: {kvp.Value}");
+                    }
                     break;
 
                 case "2":
@@ -46,7 +46,8 @@ public class Program
                     {
                     Console.WriteLine("[1] Change the restaurant info");
                     Console.WriteLine("[2] Change the menu"); // do later
-                    Console.WriteLine("[3] Exit");
+                    Console.WriteLine("[3] See all reservations"); // do later
+                    Console.WriteLine("[4] Exit");
                     Console.Write("Enter your choice: ");
                     string choice_manager = Console.ReadLine(); 
                     
@@ -58,27 +59,31 @@ public class Program
                             Console.WriteLine("What is the current email");
                             string restaurant_email = Console.ReadLine();
                             Console.WriteLine("What is the current phone number?");
-                            int phone_number = Convert.ToInt32(Console.ReadLine());
+                            string phone_number = Console.ReadLine();
                             resto1.Adress = restaurant_adress;
                             resto1.Email = restaurant_email;
                             resto1.Phone_number = phone_number;
+                            System.Console.WriteLine("Succesfully changed the restaurant info!");
 
                             break;
                         
                         case "2":
+                        //make it so you can change menu
                             break;
                         case "3":
-                            Console.WriteLine("Exited the program");
-                            exit2 = true; 
+                        //see an overview of all reservations
+
                             break;
                         case "4":
+                            Console.WriteLine("Exited the program");
+                            exit2 = true; 
                             break;
                     }
                 }
                     break;
 
                 default:
-                    Console.WriteLine("Invalid choice. Please choose a number between 1 and 3");
+                    Console.WriteLine("Invalid choice. Please choose a number between 1 and 4");
                     break;
             }
         }
