@@ -7,14 +7,11 @@ public class Program
         
         bool exit = false;
         //info abt restaurant, can be changed by manager
-        RestaurantInfo resto1 = new RestaurantInfo("", "", 0);
-        string resto_info = resto1.GetInfo();
-        Console.WriteLine(resto_info);
-
+        RestaurantInfo resto1 = new RestaurantInfo("Wijnhaven 107", "email", 06372382);
 
         while (!exit)
         {
-            Console.WriteLine(resto_info);
+            System.Console.WriteLine($"Adress: {resto1.Adress}\nEmail: {resto1.Email}\nPhone number: {resto1.Phone_number}");
             Console.WriteLine("[1] Make a reservation");
             Console.WriteLine("[2] View the menu");
             Console.WriteLine("[3] Exit");
@@ -25,12 +22,12 @@ public class Program
             switch (choice)
             {
                 case "1":
-                    // Reservation.MakeReservation();
-                    // foreach(var kvp in Reservation.tableAssignments)
-                    // {
-                    //     // ik display even alle guestsIDS and table ids die bezet zijn // gwn een overzicht voor ons & omte checken of het werkt.
-                    //     Console.WriteLine($"GuestID: {kvp.Key}, TableID: {kvp.Value}");
-                    // }
+                     Reservation.MakeReservation();
+                     foreach(var kvp in Reservation.tableAssignments)
+                     {
+                         // ik display even alle guestsIDS and table ids die bezet zijn // gwn een overzicht voor ons & omte checken of het werkt.
+                         Console.WriteLine($"GuestID: {kvp.Key}, TableID: {kvp.Value}");
+                     }
                     break;
 
                 case "2":
@@ -65,7 +62,6 @@ public class Program
                             resto1.Adress = restaurant_adress;
                             resto1.Email = restaurant_email;
                             resto1.Phone_number = phone_number;
-                            // string resto_info = $"Adress: {restaurant_adress}\nEmail: {email}\n Phone number: {phone_number}";
 
                             break;
                         
