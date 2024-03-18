@@ -1,11 +1,23 @@
-public class Menu{
-    public string MenuItem;
-    public double Price;
+public class Menu
+{
+    public List<MenuItem> Items { get; set; }
 
-
-    public Menu(string menuItem, double price)
+    public Menu()
     {
-        MenuItem = menuItem;
-        Price = price;
+        Items = new List<MenuItem>();
+    }
+
+     public void AddItem(MenuItem item)
+    {
+        Items.Add(item);
+    }
+
+    public void DisplayMenu()
+    {
+        Console.WriteLine("Menu:");
+        foreach (var item in Items)
+        {
+            Console.WriteLine($"{item.Name}: ${item.Price}");
+        }
     }
 }
