@@ -32,7 +32,7 @@ public class Reservation
         // ik maak een loop om een unieke guest ID te krijgen
         do
         {
-            guestID = random.Next(20); // voor nu even 20 guest IDs
+            guestID = random.Next(16); // voor nu even 16 guest IDs
         } while (unavailableGuestIDs.Contains(guestID));
 
         // ik voeg hier ff de guestID toe aan mijn lijst van gebruikte guest IDs
@@ -48,7 +48,7 @@ public class Reservation
         // ik maak een loop om een unieke tafel ID te krijgen
         do
         {
-            tableID = random.Next(20); // voor nu even 20 tafels  // 10x 2-persoons // 5x 4-persoons // 5x 6-persoons
+            tableID = random.Next(16); // voor nu even 16 tafels  // 8x 2-persoons // 5x 4-persoons // 2x 6-persoons
         } while (unavailableTableIDs.Contains(tableID));
 
         // ik voeg hier ff de tableID toe aan mijn lijst van gebruikte table IDs
