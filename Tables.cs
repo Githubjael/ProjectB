@@ -11,4 +11,8 @@ class Tables
         Reserved = false;
         // Amount = amount;
     }
+    public void IsReserved()
+    {
+        Reserved = true;
+    }
 }
