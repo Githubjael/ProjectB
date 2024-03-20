@@ -8,7 +8,7 @@ public class Program
         bool exit = false;
         //info abt restaurant, can be changed by manager
         RestaurantInfo resto1 = new RestaurantInfo("Wijnhaven 107\n 3011 WN Rotterdam", "email", "06372382");
-
+        Menu menu = new Menu();
         while (!exit)
         {
             System.Console.WriteLine($"Adress: {resto1.Adress}\nEmail: {resto1.Email}\nPhone number: {resto1.Phone_number}");
@@ -22,16 +22,16 @@ public class Program
             switch (choice)
             {
                 case "1":
-                    // Reservation.MakeReservation();
-                    // foreach(var kvp in Reservation.tableAssignments)
-                    // {
-                    //     // ik display even alle guestsIDS and table ids die bezet zijn // gwn een overzicht voor ons & omte checken of het werkt.
-                    //     Console.WriteLine($"GuestID: {kvp.Key}, TableID: {kvp.Value}");
-                    // }
+                    Reservation.MakeReservation();
+                    foreach(var kvp in Reservation.tableAssignments)
+                    {
+                        // ik display even alle guestsIDS and table ids die bezet zijn // gwn een overzicht voor ons & omte checken of het werkt.
+                        Console.WriteLine($"GuestID: {kvp.Key}, TableID: {kvp.Value}");
+                    }
                     break;
 
                 case "2":
-                    Console.WriteLine("Show the menu");
+                    menu.DisplayMenu();
                     break;
 
                 case "3":
@@ -83,11 +83,27 @@ public class Program
                                 switch (menuManagerChoice)
                                 {
                                     case "1":
-                                        // View the menu
+                                    //add the ability to sort here
+                                        menu.DisplayMenu();
                                         break;
 
                                     case "2":
-                                        // Add item to the menu
+                                        Console.WriteLine("What is the name of the item?");
+                                        string itemName = Console.ReadLine();
+                                        Console.WriteLine("What is the price of the item?");
+                                        double price = Convert.ToInt32(Console.ReadLine());
+                                        Console.WriteLine("Is it meat? (true/false)");
+                                        bool isMeat = Convert.ToBoolean(Console.ReadLine());
+                                        Console.WriteLine("Is it fish? (true/false)");
+                                        bool isFish = Convert.ToBoolean(Console.ReadLine());
+                                        Console.WriteLine("Is it vegetarian? (true/false)");
+                                        bool isVegetarian = Convert.ToBoolean(Console.ReadLine());
+                                        Console.WriteLine("Is it a drink? (true/false)");
+                                        bool isDrink = Convert.ToBoolean(Console.ReadLine());
+
+                                        MenuItem newItem = new MenuItem(itemName, price, isFish, isMeat, isVegetarian, isDrink);
+                                        menu.AddItem(newItem);
+                                        Console.WriteLine("Item added to the menu successfully!");
                                         break;
 
                                     case "3":
@@ -95,7 +111,6 @@ public class Program
                                         break;
 
                                     case "4":
-                                        // Exit menu management
                                         exitMenuManager = true;
                                         break;
 
