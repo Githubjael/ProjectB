@@ -22,12 +22,12 @@ public class Program
             switch (choice)
             {
                 case "1":
-                    Reservation.MakeReservation();
-                    foreach(var kvp in Reservation.tableAssignments)
-                    {
-                        // ik display even alle guestsIDS and table ids die bezet zijn // gwn een overzicht voor ons & omte checken of het werkt.
-                        Console.WriteLine($"GuestID: {kvp.Key}, TableID: {kvp.Value}");
-                    }
+                    // Reservation.MakeReservation();
+                    // foreach(var kvp in Reservation.tableAssignments)
+                    // {
+                    //     // ik display even alle guestsIDS and table ids die bezet zijn // gwn een overzicht voor ons & omte checken of het werkt.
+                    //     Console.WriteLine($"GuestID: {kvp.Key}, TableID: {kvp.Value}");
+                    // }
                     break;
 
                 case "2":
@@ -41,8 +41,8 @@ public class Program
                 
                 case "4":
                 //check login and password
-                    bool exit2 = false;
-                    while (!exit2)
+                    bool exitManager = false;
+                    while (!exitManager)
                     {
                     Console.WriteLine("[1] Change the restaurant info");
                     Console.WriteLine("[2] Change the menu"); // do later
@@ -68,15 +68,52 @@ public class Program
                             break;
                         
                         case "2":
-                        //make it so you can change menu
-                            break;
+                        //make it another while loop and a menu
+                        //options are view menu, remove from menu and add to menu
+                            bool exitMenuManager = false;
+                            while (!exitMenuManager)
+                            {
+                                Console.WriteLine("[1] View the menu");
+                                Console.WriteLine("[2] Add item to the menu");
+                                Console.WriteLine("[3] Remove item from the menu");
+                                Console.WriteLine("[4] Exit");
+                                Console.Write("Enter your choice: ");
+                                string menuManagerChoice = Console.ReadLine();
+
+                                switch (menuManagerChoice)
+                                {
+                                    case "1":
+                                        // View the menu
+                                        break;
+
+                                    case "2":
+                                        // Add item to the menu
+                                        break;
+
+                                    case "3":
+                                        // Remove item from the menu
+                                        break;
+
+                                    case "4":
+                                        // Exit menu management
+                                        exitMenuManager = true;
+                                        break;
+
+            default:
+                Console.WriteLine("Invalid choice. Please choose a number between 1 and 4");
+                break;
+                        }
+                    }
+                    break;
+
+
                         case "3":
                         //see an overview of all reservations
 
                             break;
                         case "4":
                             Console.WriteLine("Exited the program");
-                            exit2 = true; 
+                            exitManager = true; 
                             break;
                     }
                 }
