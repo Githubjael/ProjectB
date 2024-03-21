@@ -108,6 +108,9 @@ public class Program
 
                                     case "3":
                                         // Remove item from the menu
+                                        Console.WriteLine("What is the name of the item you want to remove?");
+                                        string itemToRemove = Console.ReadLine();
+                                        System.Console.WriteLine(menu.RemoveItem(itemToRemove));
                                         break;
 
                                     case "4":
