@@ -20,6 +20,18 @@ public class Menu
         Items.Add(item);
     }
 
+      public string RemoveItem(string name){
+        foreach (var item in Items)
+        {
+            if (name == item.Name){
+                Items.Remove(item);
+                return $"Succesfully removed item";
+            }
+        }
+        return $"Could not find {name}";
+    }
+
+
     public void DisplayMenu()
     {
         Console.WriteLine("Menu:");
