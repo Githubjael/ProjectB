@@ -11,18 +11,12 @@ class Tables
         Reserved = false;
         // Amount = amount;
     }
-     public bool IsTableReserved(List<ReservationDataModel> _reservation)
+    public bool IsTableReserved(List<ReservationDataModel> _reservation, int chosenYear, int chosenMonth, int chosenDay, int chosenHour )
     {
-        // voor nu ff random tijden gekozen !!, moet nog uitvogelen hoe deze datetime in c# precies werkt maar you get the vision.
-        int chosenYear = 2024;
-        int chosenMonth = 5; 
-        int chosenDay = 15;
-        int chosenHour = 14; 
-
-        // ik maaaak een date tijd object met de gekozen datum en tijd van de user (in dit geval die random tijden)
+        // ik maaaak een date tijd object met de gekozen datum en tijd van de user.
         DateTime chosenDateTime = new DateTime(chosenYear, chosenMonth, chosenDay, chosenHour, 0, 0);
 
-        // ik maak een loop door elke reservering te gaan, om overlappingen van tijden te controleren.
+        // daarna maakik een loop door elke reservering te gaan, om overlappingen van tijden te controleren.
         foreach (var reservation in _reservation)
         {
             // ik verander de reserveringsdate naar een Datetime object.
@@ -35,7 +29,7 @@ class Tables
                 DateTime reservationEndDateTime = reservationDateTime.AddHours(1); // ik denk dat elke reservering minstens 1 uur duurt dus vandaar die 1.
                 if (chosenDateTime >= reservationDateTime && chosenDateTime < reservationEndDateTime)
                 {
-                    // De tijden overlappen (de table is door een ander gereserveerd op dat moment.) Dus de tafel is niet beschikbaar
+                    // De tijden overlappen (de tafel is door een ander gereserveerd op dat moment.) Dus de tafel is niet beschikbaar
                     return false;
                 }
             }
