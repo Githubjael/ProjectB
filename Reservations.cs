@@ -14,6 +14,8 @@ public class Reservation
     public static List<int> unavailableGuestIDs = new List<int>(); // ook maak ik een lijst om de gebruikte Guests IDs op te slaan
 
     public static Dictionary<int, int> tableAssignments = new Dictionary<int, int>(); // daarna maak ik een dictionary om de gastenIDSs te koppelen aan tafelIDs   
+    
+    public static List<string> AvailableTablesIDs = new List<string>(); //Om tafels op te slaan die available zijn.
 
     public static int GenerateRandomGuestID()
     {
