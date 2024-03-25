@@ -1,7 +1,7 @@
 public class RestaurantInfo{
     public string Adress{get; set;}
     public string Email{get; set;}
-    public int Phone_number{get; set;}
+    public string Phone_number{get; set;}
 
     public RestaurantInfo(string adress, string email, int phone_number)
     {
