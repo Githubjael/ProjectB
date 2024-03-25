@@ -1,24 +1,13 @@
 
 // Deze bestand is de Interactie/Presentatie laag
+using System.Threading.Channels;
+
 public class Reservation
 {
     // Maandenlijst, later gaat elke maand zn lijst krijgen
     // Elke x wanneer een dag vol is, dan gaat de nummer van die dag uit de lijst.
-    public static List<int> Month = new List<int>()
-    {
-        1, 2, 3, 4, 5, 6, 7,
-        8, 9, 10, 11, 12, 13, 14,
-        15, 16, 17, 18, 19, 20, 21,
-        22, 23, 24, 25, 26, 27, 28,
-        29, 30, 31
-    };
+
     // Zelfde geld voor AvailableHours, elke dag zal zijn eigen lijst hebben
-    public static List<string> AvailableHours = new List<string>()
-    {
-        "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00",
-        "14:30", "15:00", "15:30", "16:00", "16:30","17:00", "17:30", "18:00", "18:30",
-        "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00"
-    };
 
     public static List<int> unavailableTableIDs = new List<int>(); // als eerst maak ik een lijst om de gebruikte tafel IDs later op te slaan
     
@@ -37,7 +26,7 @@ public class Reservation
             guestID = random.Next(16); // voor nu even 16 guest IDs
         } while (unavailableGuestIDs.Contains(guestID));
 
-        // ik voeg hier ff de guestID toe aan mijn lijst van gebruikte guest IDs
+  // ik voeg hier ff de guestID toe aan mijn lijst van gebruikte guest IDs
         unavailableGuestIDs.Add(guestID);
 
         return guestID;
@@ -60,31 +49,51 @@ public class Reservation
     }
     public static void MakeReservation()
     {
-        // vraag de gebruiker met hoeveel personen hij/zij komt
-        Console.WriteLine("How many people are coming with you?");
-        int amountOfGuests = Convert.ToInt32(Console.ReadLine());
+        // Vraag om Voornaam
+        string FirstName;
+        do{
+        System.Console.WriteLine("What is your first name?");
+        FirstName = Console.ReadLine();
+        } while (!CheckReservationInfo.CheckFirstName(FirstName));
 
-        // vraag de gebruiker in welke maand hij/zij wil boeken
-        Console.WriteLine("In what month would you like to book? Enter the number of that month.");
-        int numberOfMonth = Convert.ToInt32(Console.ReadLine());
 
+        // Vraag achternaam
+        string LastName;
+        do{
+        System.Console.WriteLine("What is your last name?");
+        LastName = Console.ReadLine();
+        } while(!CheckReservationInfo.CheckLastName(LastName));
+
+        // Vraag telefoonnummer
+        string PhoneNumber;
+        do{
+        System.Console.WriteLine("What is your phone number?");
+        PhoneNumber = Console.ReadLine();
+        } while (!CheckReservationInfo.CheckPhoneNumber(PhoneNumber));
+
+        string EmailAddress;
+        // Vraag emailadres
+        do{
+        System.Console.WriteLine("What is your email address?");
+        EmailAddress = Console.ReadLine();
+        } while (!CheckReservationInfo.CheckEmailAddress(EmailAddress));
+
+
+        // Vraag in welke maand de gast wilt komen
+        System.Console.WriteLine("What month would you like to book? Enter number of month.");
+        int ChosenMonth = Convert.ToInt32(Console.ReadLine());
+
+        // Welke Dag
         // vraag de gebruiker om een dag te kiezen
-        Console.WriteLine($"Available days for booking are:\n{string.Join(", ", Month)}.\nChoose a day.");
-        int chosenDay = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine($"Available days for booking are:\n{string.Join(", ", DisplayMonthList.GiveListBasedOnMonth(ChosenMonth))}.\nChoose a day.");
+        int ChosenDay = Convert.ToInt32(Console.ReadLine());
 
-        // vraag de gebruiker om een tijd te kiezen
-        Console.WriteLine($"Available hours for booking are:\n{string.Join(", ", AvailableHours)}\nChoose a time");
-        string chosenTime = Console.ReadLine();
+        // Vraag hoeveel Personen komen
+        System.Console.WriteLine("How many guests are coming including yourself?");
+        int AmountOfGuests = Convert.ToInt32(Console.ReadLine());
 
         // toon de reserveringsinformatie
-        Console.WriteLine($"Your reservation details:\n{chosenDay}/{numberOfMonth}/2024 at {chosenTime} for {amountOfGuests} guests");
-
-        // vraag om persoonlijke gegevens van de gebruiker
-        Console.WriteLine("What is your phone number?");
-        string phoneNumber = Console.ReadLine();
-
-        Console.WriteLine("What is your Email?");
-        string email = Console.ReadLine();
+        Console.WriteLine($"Your reservation details:\n{ChosenDay}/{ChosenMonth}/2024, for {AmountOfGuests} guests");
 
         // most importantly de ids maken voor je gasten
         int guestID = GenerateRandomGuestID();
@@ -94,7 +103,8 @@ public class Reservation
         tableAssignments.Add(guestID, tableID);
 
         // We maken een object van de Reservering om in een lijst te dumpen om naar json te sturen
-        ReservationDataModel Reservation = new ReservationDataModel(guestID, tableID, $"{chosenDay}/{numberOfMonth}/2024 {chosenTime}", email, phoneNumber);
+        ReservationDataModel Reservation = new ReservationDataModel(guestID, tableID, $"{ChosenDay}/{ChosenMonth}/2024", FirstName, LastName, EmailAddress, PhoneNumber);
+        // $"{ChosenDay}/{ChosenMonth}/2024"
         ReservationLogic.AddReservationToList(Reservation);
 
         // bevestig de reservering aan de gebruiker
