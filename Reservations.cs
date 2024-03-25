@@ -101,22 +101,31 @@ public class Reservation
         int guestID = GenerateRandomGuestID();
         int tableID = GenerateRandomTableID();
         
+
         Console.WriteLine("Do you confirm your reservation?");
         string confirmation = Console.ReadLine().ToLower();
-        if (confirmation == "y")
-        {
-            Console.WriteLine("Your reservation is confirmed.");
-        }
-        else
-        {
-            CancelReservation(guestID);
-        }
 
-        PopulateTables();
-        foreach (Tables tafel in TableTracker)
+        do 
         {
-            tafel.ID = tableID;
-        }
+            if (confirmation == "y")
+            {
+                Console.WriteLine("Your reservation is confirmed.");
+                break;
+            }
+            else if (confirmation == "n")
+            {
+                ReservationLogic.CancelReservation(guestID);
+                Console.WriteLine("Your reservation is not confirmed, Bye try again!.");
+                break;
+            }
+        } while (confirmation != "y" || confirmation != "n");
+
+
+        // PopulateTables();
+        // foreach (Tables tafel in TableTracker)
+        // {
+        //     tafel.ID = tableID;
+        // }
         // ik koppel de guest and table ids in mijn dictionarie
         tableAssignments.Add(guestID, tableID);
 
