@@ -100,7 +100,23 @@ public class Reservation
         // most importantly de ids maken voor je gasten
         int guestID = GenerateRandomGuestID();
         int tableID = GenerateRandomTableID();
+        
+        Console.WriteLine("Do you confirm your reservation?");
+        string confirmation = Console.ReadLine().ToLower();
+        if (confirmation == "y")
+        {
+            Console.WriteLine("Your reservation is confirmed.");
+        }
+        else
+        {
+            CancelReservation(guestID);
+        }
 
+        PopulateTables();
+        foreach (Tables tafel in TableTracker)
+        {
+            tafel.ID = tableID;
+        }
         // ik koppel de guest and table ids in mijn dictionarie
         tableAssignments.Add(guestID, tableID);
 
