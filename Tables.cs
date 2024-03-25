@@ -1,6 +1,6 @@
 class Tables
 {
-    public int ID;
+    public string ID;
     public string Type;
     public bool Reserved;
     // public int Amount;
