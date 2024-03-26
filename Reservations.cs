@@ -1,22 +1,28 @@
 
-// Deze bestand is de Interactie/Presentatie laag
-using System.Threading.Channels;
-
 public class Reservation
 {
-    // Maandenlijst, later gaat elke maand zn lijst krijgen
-    // Elke x wanneer een dag vol is, dan gaat de nummer van die dag uit de lijst.
-
-    // Zelfde geld voor AvailableHours, elke dag zal zijn eigen lijst hebben
 
     public static List<int> unavailableTableIDs = new List<int>(); // als eerst maak ik een lijst om de gebruikte tafel IDs later op te slaan
-    
     public static List<int> unavailableGuestIDs = new List<int>(); // ook maak ik een lijst om de gebruikte Guests IDs op te slaan
-
     public static Dictionary<int, int> tableAssignments = new Dictionary<int, int>(); // daarna maak ik een dictionary om de gastenIDSs te koppelen aan tafelIDs   
-    
     public static List<string> AvailableTablesIDs = new List<string>(); //Om tafels op te slaan die available zijn.
+    public static List<Tables> TableTracker = new List<Tables>() { }; // nodig om alle tafels op een lijstje te hebben en om staus binnen de tafels te veranderen
 
+    public static void PopulateTables()
+    {
+        for (int i = 1; i <= 8; i++)
+        {
+            TableTracker.Add(new Tables(i, "2 persons table"));
+        }
+        for (int j = 9; j <= 14 ; j++)
+        {
+            TableTracker.Add(new Tables(j, "4 persons table"));
+        }
+        for (int j = 15; j <= 16; j++)
+        {
+            TableTracker.Add(new Tables(j, "6 persons table"));
+        }
+    }
     public static int GenerateRandomGuestID()
     {
         Random random = new Random();
@@ -82,17 +88,29 @@ public class Reservation
 
 
         // Vraag in welke maand de gast wilt komen
+        string ChosenMonthString;
+        do{
         System.Console.WriteLine("What month would you like to book? Enter number of month.");
-        int ChosenMonth = Convert.ToInt32(Console.ReadLine());
+        ChosenMonthString = Console.ReadLine();
+        } while (!CheckReservationInfo.CheckChosenMonth(ChosenMonthString));
+        int ChosenMonth = Convert.ToInt32(ChosenMonthString);
 
         // Welke Dag
         // vraag de gebruiker om een dag te kiezen
+        string ChosenDayString;
+        do{
         Console.WriteLine($"Available days for booking are:\n{string.Join(", ", DisplayMonthList.GiveListBasedOnMonth(ChosenMonth))}.\nChoose a day.");
-        int ChosenDay = Convert.ToInt32(Console.ReadLine());
+        ChosenDayString = Console.ReadLine();
+        } while (!CheckReservationInfo.CheckChosenDay(ChosenDayString, ChosenMonth));
+        int ChosenDay = Convert.ToInt32(ChosenDayString);
 
         // Vraag hoeveel Personen komen
+        string Guests;
+        do{
         System.Console.WriteLine("How many guests are coming including yourself?");
-        int AmountOfGuests = Convert.ToInt32(Console.ReadLine());
+        Guests = Console.ReadLine();
+        } while (!CheckReservationInfo.CheckGuests(Guests));
+        int AmountOfGuests = Convert.ToInt32(Guests);
 
         // toon de reserveringsinformatie
         Console.WriteLine($"Your reservation details:\n{ChosenDay}/{ChosenMonth}/2024, for {AmountOfGuests} guests");
@@ -100,9 +118,9 @@ public class Reservation
         // most importantly de ids maken voor je gasten
         int guestID = GenerateRandomGuestID();
         int tableID = GenerateRandomTableID();
+        PopulateTables();
         
-
-        Console.WriteLine("Do you confirm your reservation?");
+        Console.WriteLine("Do you confirm your reservation? y/n");
         string confirmation = Console.ReadLine().ToLower();
 
         do 
@@ -121,17 +139,30 @@ public class Reservation
         } while (confirmation != "y" || confirmation != "n");
 
 
-        // PopulateTables();
         // foreach (Tables tafel in TableTracker)
         // {
-        //     tafel.ID = tableID;
+        //     tafel.ID = TableID;
         // }
+
         // ik koppel de guest and table ids in mijn dictionarie
         tableAssignments.Add(guestID, tableID);
 
+        var tabletype = AmountOfGuests switch
+        {
+            2 => "2 persons table",
+            3 => "4 persons table",
+            4 => "4 persons table",
+            5 => "6 persons table",
+            6 => "6 persons table",
+            _ => "?"
+        };
+
+        var found = TableTracker.Find(x=>x.Type.Contains(tabletype));
+        found.GuestID = guestID;
+        found.Reserved = true;
+
         // We maken een object van de Reservering om in een lijst te dumpen om naar json te sturen
-        ReservationDataModel Reservation = new ReservationDataModel(guestID, tableID, $"{ChosenDay}/{ChosenMonth}/2024", FirstName, LastName, EmailAddress, PhoneNumber);
-        // $"{ChosenDay}/{ChosenMonth}/2024"
+        ReservationDataModel Reservation = new ReservationDataModel(found, $"{ChosenDay}/{ChosenMonth}/2024", FirstName, LastName, EmailAddress, PhoneNumber);
         ReservationLogic.AddReservationToList(Reservation);
 
         // bevestig de reservering aan de gebruiker
@@ -139,3 +170,4 @@ public class Reservation
     }
 
 }
+
