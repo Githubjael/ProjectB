@@ -118,7 +118,7 @@ class CheckReservationInfo
                 System.Console.WriteLine($"*'{ChosenDay}' is not a valid number.");
                 return false;
             }
-            if (Convert.ToInt32(ChosenDay) < DisplayMonthList.GiveListBasedOnMonth(ChosenMonth)[1])
+            if (Convert.ToInt32(ChosenDay) < DisplayMonthList.GiveListBasedOnMonth(ChosenMonth)[0])
             {
                 System.Console.WriteLine("*That is not a valid number.");
                 return false;
