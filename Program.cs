@@ -4,11 +4,11 @@ public class Program
     {
         bool exit = false;
         //  info abt restaurant, can be changed by manager
-        RestaurantInfo resto1 = new RestaurantInfo("Wijnhaven 107\n 3011 WN Rotterdam", "email", "06372382");
+        RestaurantInfo resto1 = new RestaurantInfo("Wijnhaven 107\n3011 WN Rotterdam", "email", "06372382");
         Menu menu = new Menu();
         while (!exit)
     {
-        System.Console.WriteLine($"Adress: {resto1.Adress}\nEmail: {resto1.Email}\nPhone number: {resto1.Phone_number}");
+        System.Console.WriteLine($"----Restaurant Info----\nAdress: {resto1.Adress}\nEmail: {resto1.Email}\nPhone number: {resto1.Phone_number}\n-----------------------");
         Console.WriteLine("[1] Make a reservation");
         Console.WriteLine("[2] View the menu");
         Console.WriteLine("[3] Exit");
