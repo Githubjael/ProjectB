@@ -32,9 +32,10 @@ public class Menu
     }
 
 
+
     public void DisplayMenu()
     {
-        Console.WriteLine("Menu:");
+        Console.WriteLine("---------Menu----------");
         foreach (var item in Items)
         {
             Console.WriteLine($"{item.Name}: ${item.Price}");
