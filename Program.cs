@@ -4,7 +4,7 @@ public class Program
     {
         bool exit = false;
         //  info abt restaurant, can be changed by manager
-        RestaurantInfo resto1 = new RestaurantInfo("Wijnhaven 107\n 3011 WN Rotterdam", "email", 06372382);
+        RestaurantInfo resto1 = new RestaurantInfo("Wijnhaven 107\n 3011 WN Rotterdam", "email", "06372382");
         Menu menu = new Menu();
         while (!exit)
     {
@@ -56,7 +56,7 @@ public class Program
                         string phone_number = Console.ReadLine();
                         resto1.Adress = restaurant_adress;
                         resto1.Email = restaurant_email;
-                        resto1.Phone_number = Convert.ToInt32(phone_number);
+                        resto1.Phone_number = phone_number;
                         System.Console.WriteLine("Succesfully changed the restaurant info!");
 
                         break;
