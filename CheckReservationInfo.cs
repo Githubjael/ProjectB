@@ -1,3 +1,5 @@
+using System.Runtime;
+
 class CheckReservationInfo
 {
     // Check of alle characters in voornaam letter zijn
@@ -104,6 +106,11 @@ class CheckReservationInfo
     }
     public static bool CheckChosenDay(string ChosenDay, int ChosenMonth)
     {
+        // if (Convert.ToInt32(ChosenDay) <= 0)
+        // {
+        //    Console.WriteLine("*choose a day/number above 0."); 
+        //    return false;
+        // }
         if (string.IsNullOrEmpty(ChosenDay))
         {
             System.Console.WriteLine("*You must fill something in.");
@@ -138,9 +145,21 @@ class CheckReservationInfo
             }
             catch(Exception)
             {
-                System.Console.WriteLine("*You must only type in numbers.");
+                System.Console.WriteLine("*You must only type in numbers");
                 return false;
             }
+            if (Convert.ToInt32(Guests) <= 0)
+            {
+                System.Console.WriteLine("*Atleast one guest is a must to make a reservation.");
+                return false;
+            }
+            if (Convert.ToInt32(Guests) > 6)
+            {
+                System.Console.WriteLine("*Maximum guest limit per table = 6.");
+                return false;
+            }
+
+
             return true;
         }
-    }
+}
