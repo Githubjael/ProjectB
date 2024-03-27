@@ -1,12 +1,12 @@
 using System.Text.Json.Serialization;
-class ReservationDataModel
+public class ReservationDataModel
 // [{Date: {"datum":{{}, {}, {}, {}}, {"datum": {{}, ...}}]
 {
-    [JsonPropertyName("Guest ID")]
-    public int GuestID {get; set;}
+    [JsonPropertyName("Table")]
+    public Tables Table {get; set;}
 
-    [JsonPropertyName("Table ID")]
-    public int TableID {get; set;}
+    [JsonPropertyName("Table")]
+    public int GuestID {get; set;}
 
     [JsonPropertyName("Date")]
     public string Date {get; set;}
@@ -24,10 +24,10 @@ class ReservationDataModel
     [JsonPropertyName("Phone number")]
     public string PhoneNumber {get; set;}
 
-    public ReservationDataModel(int guestID, int tableID, string date, string firstName, string lastName, string emailAddress, string phoneNumber)
+    public ReservationDataModel(Tables Table, int gastID, string date, string firstName, string lastName, string emailAddress, string phoneNumber)
     {
-        GuestID = guestID;
-        TableID = tableID;
+        this.Table = Table;
+        GuestID = gastID;
         FirstName = firstName;
         LastName = lastName;
         Date = date;
