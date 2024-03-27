@@ -31,6 +31,59 @@ public class Menu
         return $"Could not find {name}";
     }
 
+    public string ChangeItem(string name)
+    {
+        foreach (var item in Items)
+        {
+            if (name == item.Name)
+            {
+                Console.WriteLine("What would you like to change?");
+                Console.WriteLine("[1] Name\n[2] Price\n[3] Type");
+                bool validChoice = false;
+                while (!validChoice)
+                {
+                    string itemChange = Console.ReadLine();
+                    switch (itemChange)
+                    {
+                        case "1":
+                            validChoice = true;
+                            Console.WriteLine($"What is the new name of the {item.Name}?");
+                            string itemName = Console.ReadLine();
+                            item.Name = itemName;
+                            return "Successfully changed!";
+                            
+                        case "2":
+                            validChoice = true;
+                            Console.WriteLine($"What is the new price of the {item.Name}?");
+                            double itemPrice = Convert.ToInt32(Console.ReadLine());
+                            item.Price = itemPrice;
+                            return "Succesfully changed!";
+                            
+                        case "3":
+                            validChoice = true;
+                            Console.WriteLine("Is it meat? (true/false)");
+                            bool isMeat = Convert.ToBoolean(Console.ReadLine());
+                            Console.WriteLine("Is it fish? (true/false)");
+                            bool isFish = Convert.ToBoolean(Console.ReadLine());
+                            Console.WriteLine("Is it vegetarian? (true/false)");
+                            bool isVegetarian = Convert.ToBoolean(Console.ReadLine());
+                            Console.WriteLine("Is it a drink? (true/false)");
+                            bool isDrink = Convert.ToBoolean(Console.ReadLine());
+                            item.IsMeat = isMeat;
+                            item.IsFish = isFish;
+                            item.IsVegetarian = isVegetarian;
+                            item.IsDrink = isDrink;
+                            return "Succesfully changed!";
+                            
+                        default:
+                            Console.WriteLine("Invalid choice. Please enter 1, 2, or 3.");
+                            break;
+                    }
+                }
+            }
+        }
+        return $"Item {name} not found.";
+    }
 
 
     public void DisplayMenu()
@@ -40,5 +93,6 @@ public class Menu
         {
             Console.WriteLine($"{item.Name}: ${item.Price}");
         }
+        Console.WriteLine("");
     }
 }
