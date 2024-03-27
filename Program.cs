@@ -1,6 +1,5 @@
-
 public class Program
- {
+{
     public static void Main()
     {
         bool exit = false;
@@ -158,7 +157,7 @@ public class Program
                     bool reservationFound = false;
                     foreach (ReservationDataModel reservation in ReservationLogic._reservation)  
                     {
-                        if (reservation.Table.GuestID == guestId)
+                        if (reservation.GuestID == guestId)
                         {
                             ReservationLogic.CancelReservation(guestId); 
                             Console.WriteLine("Your Reservation has been canceled successfully!");
