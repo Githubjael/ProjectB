@@ -21,9 +21,8 @@ class Tables
         Type = type;
         Reserved = false;
     }
-    public bool IsTableReserved(List<ReservationDataModel> _reservation, int chosenYear, int chosenMonth, int chosenDay, int chosenHour )
+    public bool IsTableReserved(int chosenYear, int chosenMonth, int chosenDay, int chosenHour )
     {
-        // Als er geen overlappingen zijn, is de tafel beschikbaar
         return true;
     }
 }
