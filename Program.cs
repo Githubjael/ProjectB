@@ -1,10 +1,11 @@
+
 public class Program
  {
     public static void Main()
     {
         bool exit = false;
         //  info abt restaurant, can be changed by manager
-        RestaurantInfo resto1 = new RestaurantInfo("Wijnhaven 107\n 3011 WN Rotterdam", "email", "06372382");
+        RestaurantInfo resto1 = new RestaurantInfo("Wijnhaven 107\n 3011 WN Rotterdam", "email", 06372382);
         Menu menu = new Menu();
         while (!exit)
     {
@@ -21,11 +22,6 @@ public class Program
         {
             case "1":
                 Reservation.MakeReservation();
-                foreach(var kvp in Reservation.tableAssignments)
-                {
-                //   ik display even alle guestsIDS and table ids die bezet zijn  gwn een overzicht voor ons & omte checken of het werkt.
-                    Console.WriteLine($"GuestID: {kvp.Key}, TableID: {kvp.Value}");
-                }
                 break;
 
             case "2":
@@ -38,12 +34,6 @@ public class Program
                 break;
         
             case "4":
-
-            case "5":
-            Console.WriteLine("Enter your Guest ID:");
-            int guestid = Convert.ToInt32(Console.ReadLine());
-            ReservationLogic.CancelReservation(guestid);
-            Console.WriteLine("Your Reservation has been cancelled succesfully!");
 
         //  check login and password
                 bool exitManager = false;
@@ -122,25 +112,66 @@ public class Program
                                     exitMenuManager = true;
                                     break;
 
+                            default:
+                                Console.WriteLine("Invalid choice. Please choose a number between 1 and 4");
+                                break;
+                                        }
+                                    }
+                                    break;
 
-        default:
-            Console.WriteLine("Invalid choice. Please choose a number between 1 and 4");
-            break;
+                                        case "3":
+                                    //  see an overview of all reservations
+
+                                            break;
+                                        case "4":
+                                            Console.WriteLine("Exited the program");
+                                            exitManager = true; 
+                                            break;
+                                    }
+                                }
+                                    break;
+
+                case "5":
+                    int guestId = 0;
+                    bool validInput = false;
+                    
+                    do
+                    {
+                        Console.WriteLine("Enter your Guest ID:");
+                        string input = Console.ReadLine();
+
+                        if (string.IsNullOrEmpty(input))
+                        {
+                            Console.WriteLine("Invalid input. You must type something. Please enter a valid Guest ID.");
+                        }
+                        else if (!input.All(char.IsDigit))
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid numeric number as Guest ID.");
+                        }
+                        else
+                        {
+                            guestId = Convert.ToInt32(input);
+                            validInput = true; 
+                        }
+                    } while (!validInput);
+
+                    bool reservationFound = false;
+                    foreach (ReservationDataModel reservation in ReservationLogic._reservation)  
+                    {
+                        if (reservation.Table.GuestID == guestId)
+                        {
+                            ReservationLogic.CancelReservation(guestId); 
+                            Console.WriteLine("Your Reservation has been canceled successfully!");
+                            reservationFound = true;
+                            break;
+                        }
                     }
-                }
-                break;
+                    if (!reservationFound)
+                    {
+                        Console.WriteLine($"No reservation found with the provided Guest ID: {guestId}");
+                    }
+                    break;
 
-                    case "3":
-                //  see an overview of all reservations
-
-                        break;
-                    case "4":
-                        Console.WriteLine("Exited the program");
-                        exitManager = true; 
-                        break;
-                }
-            }
-                break;
 
             default:
                 Console.WriteLine("Invalid choice. Please choose a number between 1 and 4");
