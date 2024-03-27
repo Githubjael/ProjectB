@@ -87,10 +87,10 @@ public class Reservation
         System.Console.WriteLine("How many guests are coming including yourself?");
         Guests = Console.ReadLine();
         } while (!CheckReservationInfo.CheckGuests(Guests));
-        int AmountOfGuests = Convert.ToInt32(Guests);
+        int guests = Convert.ToInt32(Guests);
 
         // toon de reserveringsinformatie
-        Console.WriteLine($"Your reservation details:\n{ChosenDay}/{ChosenMonth}/2024, for {AmountOfGuests} guests");
+        Console.WriteLine($"Your reservation details:\n{ChosenDay}/{ChosenMonth}/2024, for {guests} guests");
 
         PopulateTables();
 
@@ -117,10 +117,9 @@ public class Reservation
 
         if (confirmation == "y")
         {
-            // tableAssignments.Add(guestID, tableID);
 
-            var tabletype = AmountOfGuests switch
-            {
+            var tabletype = guests switch
+            {   
                 1 => "2 persons table",
                 2 => "2 persons table",
                 3 => "4 persons table",
