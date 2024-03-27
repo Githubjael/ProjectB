@@ -70,9 +70,9 @@ public class Program
                             Console.WriteLine("[1] View the menu");
                             Console.WriteLine("[2] Add item to the menu");
                             Console.WriteLine("[3] Remove item from the menu");
-                            Console.WriteLine("[4] Exit");
+                            Console.WriteLine("[4] Change an item from the menu");
+                            Console.WriteLine("[5] Exit");
                             Console.Write("Enter your choice: ");
-                            string menuManagerChoice = Console.ReadLine();
 
                             switch (menuManagerChoice)
                             {
@@ -108,6 +108,12 @@ public class Program
                                     break;
 
                                 case "4":
+                                //   Change item from the menu
+                                        Console.WriteLine("What is the name of the item you want to change");
+                                        string itemToChange = Console.ReadLine();
+                                        System.Console.WriteLine(menu.ChangeItem(itemToChange));
+                                    break;
+                                case "5":
                                     exitMenuManager = true;
                                     break;
 
