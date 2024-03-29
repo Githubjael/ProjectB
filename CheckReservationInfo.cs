@@ -1,4 +1,5 @@
 using System.Runtime;
+using System.Text.RegularExpressions;
 
 class CheckReservationInfo
 {
@@ -71,13 +72,15 @@ class CheckReservationInfo
     // ook nog met yahoo, gmail, hotmail etc etc dat moet ook nog containen
     public static bool CheckEmailAddress(string EmailAddress)
     {
-        if (EmailAddress.Contains("@") && EmailAddress.Contains("."))
+        string regex = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov|hr|nl|be|en)$";
+        if (Regex.IsMatch(EmailAddress, regex, RegexOptions.IgnoreCase))
         {
             return true;
         }
+
         else
         {
-            System.Console.WriteLine("*Your email address must contain '@' and '.'");
+            System.Console.WriteLine("*Your email address is invalid.");
             return false;
         }
     }
@@ -100,6 +103,16 @@ class CheckReservationInfo
         if (Convert.ToInt32(ChosenMonth) < DateTime.Now.Month)
         {
             System.Console.WriteLine("*This month comes before the current month.");
+            return false;
+        }
+        else if (Convert.ToInt32(ChosenMonth) < 1)
+        {
+            System.Console.WriteLine("*Please enter a number between 1 and 12");
+            return false;
+        }
+        else if (Convert.ToInt32(ChosenMonth) > 12)
+        {
+            System.Console.WriteLine("*Please enter a number between 1 and 12");
             return false;
         }
         return true;   
