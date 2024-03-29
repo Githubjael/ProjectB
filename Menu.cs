@@ -86,13 +86,54 @@ public class Menu
     }
 
 
-    public void DisplayMenu()
+public void DisplayMenu(string category)
+{
+    //check what category is asked
+    switch (category.ToLower())
     {
-        Console.WriteLine("---------Menu----------");
-        foreach (var item in Items)
-        {
-            Console.WriteLine($"{item.Name}: ${item.Price}");
-        }
-        Console.WriteLine("");
+        case "fish":
+            Console.WriteLine("---Fish---"); //prints once what item its printing
+            foreach (var item in Items)
+            {
+                if (item.IsFish)
+                {
+                    Console.WriteLine($"{item.Name}: ${item.Price}"); //prints every item name and price that is fish
+                }
+            }
+            break;
+        case "meat":
+            Console.WriteLine("---Meat---"); //prints once what item its printing
+            foreach (var item in Items)
+            {
+                if (item.IsMeat)
+                {
+                    Console.WriteLine($"{item.Name}: ${item.Price}"); //prints every item name and price that is meat
+                }
+            }
+            break;
+        case "vegetarian":
+            Console.WriteLine("---Vegetarian---"); //prints once what item its printing
+            foreach (var item in Items)
+            {
+                if (item.IsVegetarian)
+                {
+                    Console.WriteLine($"{item.Name}: ${item.Price}"); //prints every item name and price that is veg
+                }
+            }
+            break;
+        case "drinks":
+            Console.WriteLine("---Drinks---"); //prints once what item its printing
+            foreach (var item in Items)
+            {
+                if (item.IsDrink)
+                {
+                    Console.WriteLine($"{item.Name}: ${item.Price}"); //prints every item name and price that is drink
+                }
+            }
+            break;
+        default:
+            Console.WriteLine("Invalid category."); //if incorrect category is given it stops the method
+            break;
     }
+}
 }
