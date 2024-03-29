@@ -24,7 +24,12 @@ public class Program
                 break;
 
             case "2":
-                menu.DisplayMenu();
+                    Console.WriteLine("---------Menu----------");
+                    menu.DisplayMenu("fish");
+                    menu.DisplayMenu("meat");
+                    menu.DisplayMenu("vegetarian");
+                    menu.DisplayMenu("drinks");
+                    Console.WriteLine("");
                 break;
 
             case "3":
@@ -78,7 +83,12 @@ public class Program
                             {
                                 case "1":
                             //  add the ability to sort here
-                                    menu.DisplayMenu();
+                                Console.WriteLine("---------Menu----------");
+                                menu.DisplayMenu("fish");
+                                menu.DisplayMenu("meat");
+                                menu.DisplayMenu("vegetarian");
+                                menu.DisplayMenu("drinks");
+                                Console.WriteLine("");
                                     break;
 
                                 case "2":
