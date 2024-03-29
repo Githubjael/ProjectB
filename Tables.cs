@@ -1,4 +1,4 @@
-class Tables
+public class Tables
 {
     public string ID;
     public string Type;
