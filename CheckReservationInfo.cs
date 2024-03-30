@@ -1,6 +1,6 @@
 using System.Runtime;
-using System.Text.RegularExpressions;
 
+using System.Text.RegularExpressions;
 class CheckReservationInfo
 {
     // Check of alle characters in voornaam letter zijn
