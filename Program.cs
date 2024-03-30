@@ -2,6 +2,7 @@ public class Program
 {
     public static void Main()
     {
+        ReservationLogic.AddReservationFromJson(); // ouder reserveringen worden in een lijst gezet (reserveringen die al in json staan)
         bool exit = false;
         //  info abt restaurant, can be changed by manager
         RestaurantInfo resto1 = new RestaurantInfo("Wijnhaven 107\n3011 WN Rotterdam", "email", "06372382");
@@ -78,7 +79,7 @@ public class Program
                             Console.WriteLine("[4] Change an item from the menu");
                             Console.WriteLine("[5] Exit");
                             Console.Write("Enter your choice: ");
-
+                            string menuManagerChoice = Console.ReadLine();
                             switch (menuManagerChoice)
                             {
                                 case "1":
