@@ -4,8 +4,10 @@ public class Tables
     public string Type;
     public bool Reserved;
     // public int Amount;
-    public Tables(int id, string type)
-    {
+    public Tables(string id, string type) // omg wanneer er wordt gelezen in json wordt er weer een neiuwe object aangemaakt!
+    { // WAARDOOR de ids in json een EXTRA A KRIJGEN!!!!!!!!!
+    try{
+        Convert.ToInt32(id);
         if (type == "2 persons table")
         {
             ID = $"{id}A";
@@ -18,11 +20,15 @@ public class Tables
         {
             ID = $"{id}C";
         }
-        Type = type;
-        Reserved = false;
     }
-    public bool IsTableReserved(int chosenYear, int chosenMonth, int chosenDay, int chosenHour )
+    catch (Exception) // Dit zijn voor de tafels die al in json staan en die komen niet in TableTracker
     {
-        return true;
+        ID = id;
+    }
+        Type = type;
+    }
+    public void IsReserved()
+    {
+        Reserved = true;
     }
 }
