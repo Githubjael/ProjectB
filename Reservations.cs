@@ -5,19 +5,19 @@ public class Reservation
 
     public static List<Tables> TableTracker = new List<Tables>() { }; // nodig om alle tafels op een lijstje te hebben en om staus binnen de tafels te veranderen
 
-    public static void PopulateTables()
+    public static void PopulateTables() // deze moet in Reservations logische laag + info halen over gereserveerde tafels uit json
     {
         for (int i = 1; i <= 8; i++)
         {
-            TableTracker.Add(new Tables(i, "2 persons table"));
+            TableTracker.Add(new Tables(Convert.ToString(i), "2 persons table"));
         }
         for (int j = 9; j <= 14 ; j++)
         {
-            TableTracker.Add(new Tables(j, "4 persons table"));
+            TableTracker.Add(new Tables(Convert.ToString(j), "4 persons table"));
         }
         for (int j = 15; j <= 16; j++)
         {
-            TableTracker.Add(new Tables(j, "6 persons table"));
+            TableTracker.Add(new Tables(Convert.ToString(j), "6 persons table"));
         }
     }
     private static Random random = new Random();
@@ -89,6 +89,10 @@ public class Reservation
         } while (!CheckReservationInfo.CheckGuests(Guests));
         int guests = Convert.ToInt32(Guests);
 
+        // HIER KOMEN DE TIJDSTIPPEN TE STAAN
+        // voor tijdstippen moet ik checken of er wel tafels beschikbaar zijn
+        // if count = reservation.Count --> geen tafels op die tijdstip bla bla bla
+
         // toon de reserveringsinformatie
         Console.WriteLine($"Your reservation details:\n{ChosenDay}/{ChosenMonth}/2024, for {guests} guests");
 
@@ -128,8 +132,14 @@ public class Reservation
                 6 => "6 persons table",
                 _ => "?"
             };
-
-            var found = TableTracker.Find(x=>x.Type.Contains(tabletype));
+            foreach (Tables table in TableTracker)
+            {
+                if (ReservationLogic.CheckReservedTable(table.ID, $"{ChosenDay}/{ChosenMonth}/2024"))
+                {
+                    table.IsReserved();
+                }
+            }
+            var found = TableTracker.Find(x=>x.Type.Contains(tabletype) && !x.Reserved);
             // found.GuestID = guestID;
             found.Reserved = true;
             int guestID = GenerateRandomGuestID();
@@ -143,7 +153,7 @@ public class Reservation
         }
         else if (confirmation == "n")
         {
-            Console.WriteLine("Your reservation is not confirmed, Bye!.");
+            Console.WriteLine("Your reservation is not confirmed, Bye!");
         }
 
 
