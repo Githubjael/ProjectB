@@ -3,6 +3,15 @@ public class ReservationLogic
     public static List<ReservationDataModel> _reservation = new List<ReservationDataModel>(){};
 
     //  voor nu adden we alleen maar reservations naar de prive lijst
+    public static void AddReservationFromJson()
+    {
+        if (ReservationDataAccess.ReadFromJson() != null){
+        foreach(ReservationDataModel reservation in ReservationDataAccess.ReadFromJson())
+        {
+            _reservation.Add(reservation);
+        }
+    }
+    }
     public static void AddReservationToList(ReservationDataModel reservation)
     {
         _reservation.Add(reservation);
@@ -38,7 +47,7 @@ public class ReservationLogic
 
     //  korte methode om ff de reservatie op basis van guest ID te vinden.
     public static ReservationDataModel FindReservationByGuestID(int guestID)
-     {
+    {
         foreach (ReservationDataModel reservation in _reservation)  //deze loop gaat door de reservaties in de lijst , totdat hij de reservatie tegenkomt die gebonden is aan de guestID die hij uit de parameter krijgt.
         {
         if (reservation.GuestID == guestID)
@@ -47,5 +56,18 @@ public class ReservationLogic
         }
         }
         return null; //null == geen reservatie gevonden
+    }
+
+    // check of tafel bezet is
+    public static bool CheckReservedTable(string ID, string Date)
+    {
+        foreach(ReservationDataModel reservation in _reservation)
+        {
+            if(reservation.Table.ID == ID && reservation.Date == Date)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
