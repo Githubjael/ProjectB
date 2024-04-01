@@ -2,26 +2,7 @@
 public class Reservation
 {
     public static List<int> unavailableGuestIDs = new List<int>(); // ik een lijst om de gebruikte Guests IDs op te slaan
-
-    public static List<Tables> TableTracker = new List<Tables>() { }; // nodig om alle tafels op een lijstje te hebben en om staus binnen de tafels te veranderen
-
-    public static void PopulateTables() // deze moet in Reservations logische laag + info halen over gereserveerde tafels uit json
-    {
-        for (int i = 1; i <= 8; i++)
-        {
-            TableTracker.Add(new Tables(Convert.ToString(i), "2 persons table"));
-        }
-        for (int j = 9; j <= 14 ; j++)
-        {
-            TableTracker.Add(new Tables(Convert.ToString(j), "4 persons table"));
-        }
-        for (int j = 15; j <= 16; j++)
-        {
-            TableTracker.Add(new Tables(Convert.ToString(j), "6 persons table"));
-        }
-    }
     private static Random random = new Random();
-
     public static int GenerateRandomGuestID()
     {
         int guestID;
@@ -35,6 +16,7 @@ public class Reservation
     }
     public static void MakeReservation()
     {
+        ReservedTable.PopulateTables(); // Maakt Tafelobjecten aan
         // Vraag om Voornaam
         string FirstName;
         do{
@@ -96,8 +78,6 @@ public class Reservation
         // toon de reserveringsinformatie
         Console.WriteLine($"Your reservation details:\n{ChosenDay}/{ChosenMonth}/2024, for {guests} guests");
 
-        PopulateTables();
-
         string confirmation;
         bool valid = false; 
         do
@@ -132,14 +112,7 @@ public class Reservation
                 6 => "6 persons table",
                 _ => "?"
             };
-            foreach (Tables table in TableTracker)
-            {
-                if (ReservationLogic.CheckReservedTable(table.ID, $"{ChosenDay}/{ChosenMonth}/2024"))
-                {
-                    table.IsReserved();
-                }
-            }
-            var found = TableTracker.Find(x=>x.Type.Contains(tabletype) && !x.Reserved);
+            var found = ReservedTable.TableTracker.Find(x=>x.Type.Contains(tabletype) && !x.Reserved);
             // found.GuestID = guestID;
             found.Reserved = true;
             int guestID = GenerateRandomGuestID();
