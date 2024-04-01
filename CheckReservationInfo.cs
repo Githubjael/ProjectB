@@ -115,6 +115,11 @@ class CheckReservationInfo
             System.Console.WriteLine("*Please enter a number between 1 and 12");
             return false;
         }
+        else if (DisplayMonthList.GiveListBasedOnMonth(Convert.ToInt32(ChosenMonth)).Count == 0)
+        {
+            System.Console.WriteLine("This month is unfortunately full. Please choose another Month");
+            return false;
+        }
         return true;   
     }
     public static bool CheckChosenDay(string ChosenDay, int ChosenMonth)
@@ -146,6 +151,11 @@ class CheckReservationInfo
             else if (Convert.ToInt32(ChosenDay) > DisplayMonthList.GiveListBasedOnMonth(ChosenMonth)[DisplayMonthList.GiveListBasedOnMonth(ChosenMonth).Count - 1])
             {
                 System.Console.WriteLine("*That is not a valid number.");
+                return false;
+            }
+            else if (!DisplayMonthList.GiveListBasedOnMonth(ChosenMonth).Contains(Convert.ToInt32(ChosenDay)))
+            {
+                System.Console.WriteLine("This day is unfortunately fully booked. Choose another day.");
                 return false;
             }
             return true; 
