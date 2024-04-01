@@ -28,6 +28,7 @@ public class ReservationLogic
         if (reservationToRemove != null)
         {
         //  als eerst verwijder ik de reservatie van de list.
+            reservationToRemove.Table.Cancelled();
             _reservation.Remove(reservationToRemove);
 
         //   ik sla de nieuwe lijst van reserveringen in de json op, dus de lijst zonder de gecancelde reservaties
@@ -36,7 +37,6 @@ public class ReservationLogic
         //   ook voeg ik de tafel ID weer terug naar beschikbare tafels daarvoor gebruik ik ff een korte methode (die ik beneden maak)
             string tableID = reservationToRemove.Table.ID;
             // AddAvailableTable(tableID);
-
             Console.WriteLine("Reservation is cancelled.");
         }
         else
