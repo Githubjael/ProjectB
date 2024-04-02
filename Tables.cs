@@ -31,4 +31,8 @@ public class Tables
     {
         Reserved = true;
     }
+    public void Cancelled()
+    {
+        Reserved = false;
+    }
 }
