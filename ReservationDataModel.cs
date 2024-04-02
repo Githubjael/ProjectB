@@ -36,15 +36,4 @@ public class ReservationDataModel
         EmailAddress = emailAddress;
         PhoneNumber = phoneNumber;
     }
-    [JsonConstructor]
-    public ReservationDataModel(List<Tables> tables, int gastID, string date, string firstName, string lastName, string emailAddress, string phoneNumber)
-    {
-        Tables = tables;
-        GuestID = gastID;
-        FirstName = firstName;
-        LastName = lastName;
-        Date = date;
-        EmailAddress = emailAddress;
-        PhoneNumber = phoneNumber;
-    }
 }
