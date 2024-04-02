@@ -80,6 +80,7 @@ public class Reservation
 
         string confirmation;
         bool valid = false; 
+        int guestID = GenerateRandomGuestID();
         do
         {
             Console.WriteLine("Do you confirm your reservation? y/n");
@@ -101,28 +102,47 @@ public class Reservation
 
         if (confirmation == "y")
         {
+            if (guests > 6){
+                List<Tables> ChosenTables = ReservedTable.AssignTable(guests);
+                // We maken een object van de Reservering om in een lijst te dumpen om naar json te sturen
+                // We maken een object van de Reservering om in een lijst te dumpen om naar json te sturen
+                ReservationDataModel Reservation = new ReservationDataModel(ChosenTables, guestID, $"{ChosenDay}/{ChosenMonth}/2024", FirstName, LastName, EmailAddress, PhoneNumber);
+                ReservationLogic.AddReservationToList(Reservation);
+                // bevestig de reservering aan de gebruiker
+                Console.WriteLine($"Your reservation is confirmed.\nThank you for choosing our restaurant, we look forward to serving you!");
+                string tableids = "";
+                foreach (Tables table in ChosenTables)
+                {
+                    tableids += $"{table.ID} ";
+                }
+                Console.WriteLine($"Your Guest ID {guestID}, Your table numbers = {tableids}");
+            }
+            else
+            {
+                var tabletype = guests switch
+                {
+                    1 => "2 persons table",
+                    2 => "2 persons table",
+                    3 => "4 persons table",
+                    4 => "4 persons table",
+                    5 => "6 persons table",
+                    6 => "6 persons table",
+                    _ => "?"
+                };
 
-            var tabletype = guests switch
-            {   
-                1 => "2 persons table",
-                2 => "2 persons table",
-                3 => "4 persons table",
-                4 => "4 persons table",
-                5 => "6 persons table",
-                6 => "6 persons table",
-                _ => "?"
-            };
-            var found = ReservedTable.TableTracker.Find(x=>x.Type.Contains(tabletype) && !x.Reserved);
-            // found.GuestID = guestID;
-            found.Reserved = true;
-            int guestID = GenerateRandomGuestID();
-            // We maken een object van de Reservering om in een lijst te dumpen om naar json te sturen
-            ReservationDataModel Reservation = new ReservationDataModel(found, guestID, $"{ChosenDay}/{ChosenMonth}/2024",  FirstName, LastName, EmailAddress, PhoneNumber);
-            ReservationLogic.AddReservationToList(Reservation);
+                var found = ReservedTable.TableTracker.Find(x=>x.Type.Contains(tabletype));
+                // found.GuestID = guestID;
+                found.Reserved = true;
 
-            // bevestig de reservering aan de gebruiker
-            Console.WriteLine($"Your reservation is confirmed.\nThank you for choosing our restaurant, we look forward to serving you!");
-            Console.WriteLine($"Your Guest ID {Reservation.GuestID}, Your table number = {Reservation.Table.ID}");
+                // We maken een object van de Reservering om in een lijst te dumpen om naar json te sturen
+                ReservationDataModel Reservation = new ReservationDataModel(found, guestID, $"{ChosenDay}/{ChosenMonth}/2024", FirstName, LastName, EmailAddress, PhoneNumber);
+                ReservationLogic.AddReservationToList(Reservation);
+
+                // bevestig de reservering aan de gebruiker
+                Console.WriteLine($"Your reservation is confirmed.\nThank you for choosing our restaurant, we look forward to serving you!");
+                Console.WriteLine($"Your Guest ID {Reservation.GuestID}, Your table number = {Reservation.Table.ID}");
+
+            }
         }
         else if (confirmation == "n")
         {
@@ -130,6 +150,6 @@ public class Reservation
         }
 
 
-    }
 
+}
 }
