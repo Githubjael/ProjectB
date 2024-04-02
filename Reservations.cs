@@ -106,8 +106,10 @@ public class Reservation
                 List<Tables> ChosenTables = ReservedTable.AssignTable(guests);
                 // We maken een object van de Reservering om in een lijst te dumpen om naar json te sturen
                 // We maken een object van de Reservering om in een lijst te dumpen om naar json te sturen
-                ReservationDataModel Reservation = new ReservationDataModel(ChosenTables, guestID, $"{ChosenDay}/{ChosenMonth}/2024", FirstName, LastName, EmailAddress, PhoneNumber);
+                foreach(Tables table in ChosenTables){
+                ReservationDataModel Reservation = new ReservationDataModel(table, guestID, $"{ChosenDay}/{ChosenMonth}/2024", FirstName, LastName, EmailAddress, PhoneNumber);
                 ReservationLogic.AddReservationToList(Reservation);
+                }
                 // bevestig de reservering aan de gebruiker
                 Console.WriteLine($"Your reservation is confirmed.\nThank you for choosing our restaurant, we look forward to serving you!");
                 string tableids = "";
