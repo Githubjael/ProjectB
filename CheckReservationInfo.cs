@@ -176,13 +176,6 @@ class CheckReservationInfo
                 System.Console.WriteLine("*Atleast one guest is a must to make a reservation.");
                 return false;
             }
-            if (Convert.ToInt32(Guests) > 6)
-            {
-                System.Console.WriteLine("*Maximum guest limit per table = 6.");
-                return false;
-            }
-
-
             return true;
         }
 }
