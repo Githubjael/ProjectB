@@ -5,7 +5,9 @@ public class ReservationDataModel
     [JsonPropertyName("Table")]
     public Tables Table {get; set;}
 
-    [JsonPropertyName("Guest ID")]
+    public List<Tables> Tables {get; set;}
+
+    [JsonPropertyName("GuestID")]
     public int GuestID {get; set;}
 
     [JsonPropertyName("Date")]
@@ -23,10 +25,21 @@ public class ReservationDataModel
 
     [JsonPropertyName("Phone number")]
     public string PhoneNumber {get; set;}
-
+    [JsonConstructor]
     public ReservationDataModel(Tables Table, int gastID, string date, string firstName, string lastName, string emailAddress, string phoneNumber)
     {
         this.Table = Table;
+        GuestID = gastID;
+        FirstName = firstName;
+        LastName = lastName;
+        Date = date;
+        EmailAddress = emailAddress;
+        PhoneNumber = phoneNumber;
+    }
+    [JsonConstructor]
+    public ReservationDataModel(List<Tables> tables, int gastID, string date, string firstName, string lastName, string emailAddress, string phoneNumber)
+    {
+        Tables = tables;
         GuestID = gastID;
         FirstName = firstName;
         LastName = lastName;
