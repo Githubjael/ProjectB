@@ -1,5 +1,6 @@
 public class Program
 {
+    private static List<Review> reviews = new List<Review>();
     public static void Main()
     {
         ReservationLogic.AddReservationFromJson(); // ouder reserveringen worden in een lijst gezet (reserveringen die al in json staan)
@@ -15,6 +16,8 @@ public class Program
         Console.WriteLine("[3] Exit");
         Console.WriteLine("[4] Login as manager");
         Console.WriteLine("[5] Cancel a reservation");
+        Console.WriteLine("[6] Review our restaurant");
+        Console.WriteLine("[7] See reviews");
         Console.Write("Enter your choice: ");
         string choice = Console.ReadLine();
 
@@ -185,6 +188,41 @@ public class Program
                     if (!reservationFound)
                     {
                         Console.WriteLine($"No reservation found with the provided Guest ID: {guestId}");
+                    }
+                    break;
+                
+                case "6":
+                    Console.WriteLine("Enter your name:");
+                    string guestName = Console.ReadLine();
+
+                    Console.WriteLine("Rate our restaurant (from 1 to 5):");
+                    int rating;
+                    while (!int.TryParse(Console.ReadLine(), out rating) || rating < 1 || rating > 5)
+                    {
+                        Console.WriteLine("Invalid input. Please enter a number between 1 and 5.");
+                    }
+
+                    Console.WriteLine("Leave your comments:");
+                    string comments = Console.ReadLine();
+
+                    Review newReview = new Review(guestName, rating, comments);
+                    reviews.Add(newReview);
+                    Console.WriteLine("Thank you for your review!");
+                    break;
+
+                case "7":
+                    // View reviews
+                    if (reviews.Count == 0)
+                    {
+                        Console.WriteLine("No reviews available.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Reviews:");
+                        foreach (var review in reviews)
+                        {
+                            Console.WriteLine($"Guest: {review.GuestName}, Rating: {review.Rating}, Comments: {review.Comments}");
+                        }
                     }
                     break;
 
