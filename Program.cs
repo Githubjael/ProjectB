@@ -28,12 +28,45 @@ public class Program
                 break;
 
             case "2":
-                    Console.WriteLine("---------Menu----------");
-                    menu.DisplayMenu("fish");
-                    menu.DisplayMenu("meat");
-                    menu.DisplayMenu("vegetarian");
-                    menu.DisplayMenu("drinks");
-                    Console.WriteLine("");
+                    bool ExitMenuView = false;
+                    while (!ExitMenuView)
+                    {
+                    Console.WriteLine("[1] View a specific category");
+                    Console.WriteLine("[2] View the full menu");
+                    Console.WriteLine("[3] Exit");
+                    Console.Write("Enter your choice: ");
+                    string choiceMenuView = Console.ReadLine();
+
+                    switch (choiceMenuView)
+                    {
+                    case "1":
+                    //make it so bad user input doesnt crash program for all of these
+                    Console.WriteLine("fish or meat or vegetarian or drinks");
+                    Console.Write("Enter your choice: ");
+                    string UserChoiceMenuView = Console.ReadLine();
+                    menu.DisplayMenu(UserChoiceMenuView);
+                        
+                    break;
+
+                    case "2":
+                        Console.WriteLine("---------Menu----------");
+                        menu.DisplayMenu("fish");
+                        menu.DisplayMenu("meat");
+                        menu.DisplayMenu("vegetarian");
+                        menu.DisplayMenu("drinks");
+                        Console.WriteLine("");
+                    break;
+
+                    case "3":
+                    ExitMenuView = true;
+                    Console.WriteLine("Exited the menu view");
+                    break;
+
+                    default:
+                            Console.WriteLine("Invalid choice. Please choose a number between 1 and 3");
+                    break;
+                    }
+                    }
                 break;
 
             case "3":
