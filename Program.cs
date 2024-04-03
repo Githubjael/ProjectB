@@ -41,7 +41,7 @@ public class Program
                     {
                     case "1":
                     //make it so bad user input doesnt crash program for all of these
-                    Console.WriteLine("fish or meat or vegetarian or drinks");
+                    Console.WriteLine("fish or meat or vegetarian or drinks"); //make it so that upper/lowercase also works
                     Console.Write("Enter your choice: ");
                     string UserChoiceMenuView = Console.ReadLine();
                     menu.DisplayMenu(UserChoiceMenuView);
