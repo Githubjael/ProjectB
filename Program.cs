@@ -57,11 +57,12 @@ public class Program
                 switch (choice_manager)
                 {
                     case "1":
-                        Console.WriteLine("What is the current addres?");
+                        //make it so bad user input doesnt crash program for all of these
+                        Console.WriteLine("What is the current addres?"); // min/max char or other req?
                         string restaurant_adress = Console.ReadLine();
-                        Console.WriteLine("What is the current email");
+                        Console.WriteLine("What is the current email"); //make sure its email
                         string restaurant_email = Console.ReadLine();
-                        Console.WriteLine("What is the current phone number?");
+                        Console.WriteLine("What is the current phone number?"); //make sure its 10 numbers
                         string phone_number = Console.ReadLine();
                         resto1.Adress = restaurant_adress;
                         resto1.Email = restaurant_email;
@@ -86,7 +87,7 @@ public class Program
                             switch (menuManagerChoice)
                             {
                                 case "1":
-                            //  add the ability to sort here
+                            //  make another while or something so user can choose to only see specifics or entire menu
                                 Console.WriteLine("---------Menu----------");
                                 menu.DisplayMenu("fish");
                                 menu.DisplayMenu("meat");
@@ -96,11 +97,12 @@ public class Program
                                     break;
 
                                 case "2":
-                                    Console.WriteLine("What is the name of the item?");
+                                    //make it so bad user input doesnt crash program for all of these
+                                    Console.WriteLine("What is the name of the item?"); // maybe max/min char?
                                     string itemName = Console.ReadLine();
-                                    Console.WriteLine("What is the price of the item?");
+                                    Console.WriteLine("What is the price of the item? (use comma) "); //make it so . also works?
                                     double price = Convert.ToInt32(Console.ReadLine());
-                                    Console.WriteLine("Is it meat? (true/false)");
+                                    Console.WriteLine("Is it meat? (true/false)"); 
                                     bool isMeat = Convert.ToBoolean(Console.ReadLine());
                                     Console.WriteLine("Is it fish? (true/false)");
                                     bool isFish = Convert.ToBoolean(Console.ReadLine());
@@ -116,6 +118,7 @@ public class Program
 
                                 case "3":
                                 //   Remove item from the menu
+                                //make it so bad user input doesnt crash program for all of these
                                         Console.WriteLine("What is the name of the item you want to remove?");
                                         string itemToRemove = Console.ReadLine();
                                         System.Console.WriteLine(menu.RemoveItem(itemToRemove));
@@ -123,6 +126,7 @@ public class Program
 
                                 case "4":
                                 //   Change item from the menu
+                                //make it so bad user input doesnt crash program for all of these
                                         Console.WriteLine("What is the name of the item you want to change");
                                         string itemToChange = Console.ReadLine();
                                         System.Console.WriteLine(menu.ChangeItem(itemToChange));
@@ -132,7 +136,7 @@ public class Program
                                     break;
 
                             default:
-                                Console.WriteLine("Invalid choice. Please choose a number between 1 and 4");
+                                Console.WriteLine("Invalid choice. Please choose a number between 1 and 5");
                                 break;
                                         }
                                     }
@@ -228,7 +232,7 @@ public class Program
 
 
             default:
-                Console.WriteLine("Invalid choice. Please choose a number between 1 and 4");
+                Console.WriteLine("Invalid choice. Please choose a number between 1 and 7");
                 break;
         }
     }
