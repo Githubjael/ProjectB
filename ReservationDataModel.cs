@@ -5,7 +5,7 @@ public class ReservationDataModel
     [JsonPropertyName("Table")]
     public Tables Table {get; set;}
 
-    public List<Tables> Tables {get; set;}
+    // public List<Tables> Tables {get; set;}
 
     [JsonPropertyName("GuestID")]
     public int GuestID {get; set;}
