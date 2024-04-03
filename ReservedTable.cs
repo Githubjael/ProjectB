@@ -1,4 +1,4 @@
-class ReservedTable
+static class ReservedTable
 {
 
     public static List<Tables> TableTracker = new List<Tables>() { }; // nodig om alle tafels op een lijstje te hebben en om staus binnen de tafels te veranderen
@@ -13,9 +13,9 @@ class ReservedTable
         {
             TableTracker.Add(new Tables(Convert.ToString(j), "4 persons table"));
         }
-        for (int j = 15; j <= 16; j++)
+        for (int k = 15; k <= 16; k++)
         {
-            TableTracker.Add(new Tables(Convert.ToString(j), "6 persons table"));
+            TableTracker.Add(new Tables(Convert.ToString(k), "6 persons table"));
         }
     }
     public static List<Tables> AssignTable(int AmountOfGuests)
@@ -28,24 +28,24 @@ class ReservedTable
                 {
                     Capacity = 2
                 };
-                bool Loop = true;
+                // bool Loop = true;
                 int ToReserve;
                 do
                 {
-                    if (ToBeSeated > 6)
+                    if (ToBeSeated >= 6)
                     {
                         Console.WriteLine($"Choose a Table to reserve(1-3):");
                         Console.WriteLine($"1) 2 persons table");
                         Console.WriteLine($"2) 4 persons table");
                         Console.WriteLine($"3) 6 persons table");
                     }
-                    else if (ToBeSeated < 6)
+                    else if (ToBeSeated >= 3)
                     {
                         Console.WriteLine($"Choose a Table to reserve(1-3):");
                         Console.WriteLine($"1) 2 persons table");
                         Console.WriteLine($"2) 4 persons table");
                     }
-                    else if (ToBeSeated < 3)
+                    else if (ToBeSeated >= 1)
                     {
                         Console.WriteLine($"Choose a Table to reserve(1-3):");
                         Console.WriteLine($"1) 2 persons table");
@@ -63,19 +63,23 @@ class ReservedTable
                     {
                         ToBeSeated -= 6;
                         Console.WriteLine("Thank you!");
+                        ToReserve = Convert.ToInt16(answer);
+                        TableTypes.Add(ToReserve);
                     }
                     else if (answer == "2")
                     {
                         ToBeSeated -= 4;
                         Console.WriteLine("Thank you!");
+                        ToReserve = Convert.ToInt16(answer);
+                        TableTypes.Add(ToReserve);
                     }
                     else if(answer == "1")
                     {
                         ToBeSeated -= 2;
                         Console.WriteLine("Thank you!");
+                        ToReserve = Convert.ToInt16(answer);
+                        TableTypes.Add(ToReserve);
                     }
-                    ToReserve = Convert.ToInt16(answer);
-                    TableTypes.Add(ToReserve);
                 } while(ToBeSeated > 0);
                 foreach(int type in TableTypes)
                 {
