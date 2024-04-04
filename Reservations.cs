@@ -73,10 +73,15 @@ public class Reservation
 
         // HIER KOMEN DE TIJDSTIPPEN TE STAAN
         // voor tijdstippen moet ik checken of er wel tafels beschikbaar zijn
-        // if count = reservation.Count --> geen tafels op die tijdstip bla bla bla
+        string ChosenTime;
+        do{
+            Console.WriteLine($"Available time slots for booking are:\n{string.Join(", ", DisplayDayList.DayList)}.\nChoose a time slot.");
+            System.Console.WriteLine("At what time would you wish to come?");
+            ChosenTime = Console.ReadLine();
+        } while (!CheckReservationInfo.CheckTime(ChosenTime));
 
         // toon de reserveringsinformatie
-        Console.WriteLine($"Your reservation details:\n{ChosenDay}/{ChosenMonth}/2024, for {guests} guests");
+        Console.WriteLine($"Your reservation details:\n{ChosenDay}/{ChosenMonth}/2024 at {ChosenTime}, for {guests} guests");
 
         string confirmation;
         bool valid = false; 
@@ -107,7 +112,7 @@ public class Reservation
                 // We maken een object van de Reservering om in een lijst te dumpen om naar json te sturen
                 // We maken een object van de Reservering om in een lijst te dumpen om naar json te sturen
                 foreach(Tables table in ChosenTables){
-                ReservationDataModel Reservation = new ReservationDataModel(table, guestID, $"{ChosenDay}/{ChosenMonth}/2024", FirstName, LastName, EmailAddress, PhoneNumber);
+                ReservationDataModel Reservation = new ReservationDataModel(table, guestID, $"{ChosenDay}/{ChosenMonth}/2024", ChosenTime, FirstName, LastName, EmailAddress, PhoneNumber);
                 ReservationLogic.AddReservationToList(Reservation);
                 }
                 // bevestig de reservering aan de gebruiker
@@ -137,7 +142,7 @@ public class Reservation
                 found.Reserved = true;
 
                 // We maken een object van de Reservering om in een lijst te dumpen om naar json te sturen
-                ReservationDataModel Reservation = new ReservationDataModel(found, guestID, $"{ChosenDay}/{ChosenMonth}/2024", FirstName, LastName, EmailAddress, PhoneNumber);
+                ReservationDataModel Reservation = new ReservationDataModel(found, guestID, $"{ChosenDay}/{ChosenMonth}/2024", ChosenTime, FirstName, LastName, EmailAddress, PhoneNumber);
                 ReservationLogic.AddReservationToList(Reservation);
 
                 // bevestig de reservering aan de gebruiker
