@@ -95,26 +95,68 @@ static class ReservedTable
                 }
             return ChosenTables;
     }
-    public static void CheckIfTableReserved(int month){
+    public static void CheckIfTableReserved(int day, int month){
         // zet tafels in alle dagen van het jaar op vol als ze dat zijn
-        int day = 1;
-        int Count = 1;
+        string time = "10:00";
+        int TimeCount = 0; // kijkt of tijdstip vol is
         foreach (Tables table in TableTracker)
         {
-            // kijk hier na of alle tafles op die datum vol zijn
-            if (ReservationLogic.CheckReservedTable(table.ID, $"{day}/{month}/2024"))
+            // kijk hier na of alle tafles op die tijdstip vol zijn
+            if (ReservationLogic.CheckReservedTable(table.ID, $"{day}/{month}/2024", time))
             {
                 table.IsReserved();
-                Count++; //checked aantal gereserveerde tafels op die dag
+                TimeCount++; //checked aantal gereserveerde tafels op die dag
             }
-            if (Count == TableTracker.Count)
-            {
-                DisplayMonthList.MonthList.Remove(day);
+            if (TimeCount >= TableTracker.Count){
+                DisplayDayList.GiveListBasedOnDay(day, month).Remove(time);
+               //Remove from list 
             }
-            if (day == DateTime.DaysInMonth(DateTime.Now.Year, month)){
+            // if (DayCount >= TableTracker.Count)
+            // {
+            //     DisplayMonthList.MonthList.Remove(day);
+            // } ----> GEBEURD IN DisplayDayList
+
+            switch (time){
+                case "10:00":
+                time = "10:30";
+                break;
+                case "10:30":
+                time = "11:00";
+                break;
+                case "11:00":
+                time = "11:30";
+                break;
+                case "11:30":
+                time = "12:00";
+                break;
+                case "12:00":
+                time = "12:30";
+                break;
+                case "12:30":
+                time = "13:00";
+                break;
+                case "13:00":
+                time = "13:30";
+                break;
+                case "13:30":
+                time = "14:00";
+                break;
+                case "14:30":
+                time = "15:00";
+                break;
+                case "15:00":
+                time = "15:30";
+                break;
+                case "15:30":
+                time = "16:00";
+                break;
+                case "16:00":
+                time = "16:30";
+                break;
+                case "16:30":
+                time = "17:00";
                 break;
             }
-            day++;
         }
     }   
 
