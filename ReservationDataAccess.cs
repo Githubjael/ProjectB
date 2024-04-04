@@ -1,43 +1,27 @@
-using System.Text.Json.Serialization;
-public class ReservationDataModel
-// [{Date: {"datum":{{}, {}, {}, {}}, {"datum": {{}, ...}}]
+using Newtonsoft.Json;
+
+class ReservationDataAccess
 {
-    [JsonPropertyName("Table")]
-    public Tables Table {get; set;}
+    public static string fileName = @"C:\Users\User\Desktop\Project-B\Reservations.Json";
 
-    [JsonPropertyName("GuestID")]
-    public int GuestID {get; set;}
-
-    [JsonPropertyName("Date")]
-    public string Date {get; set;}
-
-    [JsonPropertyName("Time")]
-
-    public string Time {get; set;}
-
-    [JsonPropertyName("First name")]
-    public string FirstName {get; set;}
-
-    [JsonPropertyName("Last name")]
-
-    public string LastName {get; set;}
-
-    [JsonPropertyName("Email address")]
-    public string EmailAddress {get; set;}
-
-    [JsonPropertyName("Phone number")]
-    public string PhoneNumber {get; set;}
-    
-    [JsonConstructor]
-    public ReservationDataModel(Tables Table, int gastID, string date, string time, string firstName, string lastName, string emailAddress, string phoneNumber)
+    // voor nu schrijven we alle reservations naar json
+    // er wordt nog niet nagekeken of de dagen/maanden/tafels etc etc available zijn 
+    // en reservations kunnen nog niet worden geannuleerd
+    public static List<ReservationDataModel> ReadFromJson() // Alle reserveringen lezen en in een lijst stoppen
     {
-        this.Table = Table;
-        GuestID = gastID;
-        FirstName = firstName;
-        LastName = lastName;
-        Date = date;
-        Time = time;
-        EmailAddress = emailAddress;
-        PhoneNumber = phoneNumber;
+        using StreamReader reader = new(fileName);
+        var json = reader.ReadToEnd();
+        List<ReservationDataModel> AllReservations = JsonConvert.DeserializeObject<List<ReservationDataModel>>(json);
+        return AllReservations;
+        // in logische laag moet je kijken of er een tafelID is
+    }
+    public static void WriteToJson(List<ReservationDataModel> ReservationList)
+    {
+        // write to json
+        StreamWriter writer = new(fileName);
+        string List2Json = JsonConvert.SerializeObject(ReservationList);
+        writer.Write(List2Json);
+        writer.Close();
+        // write to json
     }
 }
