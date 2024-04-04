@@ -59,11 +59,11 @@ public class ReservationLogic
     }
 
     // check of tafel bezet is
-    public static bool CheckReservedTable(string ID, string Date)
+    public static bool CheckReservedTable(string ID, string Date, string Time)
     {
         foreach(ReservationDataModel reservation in _reservation)
         {
-            if(reservation.Table.ID == ID && reservation.Date == Date)
+            if(reservation.Table.ID == ID && reservation.Date == Date && reservation.Time == Time)
             {
                 return true;
             }
