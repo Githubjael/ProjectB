@@ -23,11 +23,10 @@ class DisplayMonthList
                 22, 23, 24, 25, 26, 27, 28,
                 29, 30, 31
             };
-            ReservedTable.CheckIfTableReserved(Month);
             if (MonthList.Count != 0){
             if (Month == DateTime.Now.Month){
             foreach(int dag in MonthList.ToList()){
-                if (dag < DateTime.Now.Day)
+                if (dag <= DateTime.Now.Day)
                 {
                     MonthList.Remove(dag);
                 }
@@ -52,11 +51,10 @@ class DisplayMonthList
                 22, 23, 24, 25, 26, 27, 28 
                 };
             }
-            ReservedTable.CheckIfTableReserved(Month);
             if (MonthList.Count != 0){
             if (Month == DateTime.Now.Month){
             foreach(int dag in MonthList.ToList()){
-                if (dag < DateTime.Now.Day)
+                if (dag <= DateTime.Now.Day)
                 {
                     MonthList.Remove(dag);
                 }
@@ -73,11 +71,10 @@ class DisplayMonthList
                 22, 23, 24, 25, 26, 27, 28, 29,
                 30
             };
-            ReservedTable.CheckIfTableReserved(Month);
             if (MonthList.Count != 0){
             if (Month == DateTime.Now.Month){
             foreach(int dag in MonthList.ToList()){
-                if (dag < DateTime.Now.Day)
+                if (dag <= DateTime.Now.Day)
                 {
                     MonthList.Remove(dag);
                 }
@@ -86,5 +83,5 @@ class DisplayMonthList
             }
             return MonthList;
     }
-}
+    }
 }
