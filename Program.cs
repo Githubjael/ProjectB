@@ -249,7 +249,6 @@ public class Program
                         if (reservation.GuestID == guestId)
                         {
                             ReservationLogic.CancelReservation(guestId); 
-                            Console.WriteLine("Your Reservation has been canceled successfully!");
                             reservationFound = true;
                             break;
                         }
