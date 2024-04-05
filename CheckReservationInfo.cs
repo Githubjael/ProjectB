@@ -178,4 +178,14 @@ class CheckReservationInfo
             }
             return true;
         }
+        public static bool CheckTime(string Time){
+            foreach(string time in DisplayDayList.DayList)
+            {
+                if (time == Time){
+                    return true;
+                }
+            }
+            System.Console.WriteLine("Invalid choice of time. Choose another time for your reservation.");
+            return false;
+        }
 }
