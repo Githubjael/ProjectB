@@ -97,66 +97,33 @@ static class ReservedTable
     }
     public static void CheckIfTableReserved(int day, int month){
         // zet tafels in alle dagen van het jaar op vol als ze dat zijn
-        string time = "10:00";
         int TimeCount = 0; // kijkt of tijdstip vol is
+    List<string> TimeList = new(){
+        "10:00", "10:30", "11:00",
+        "11:30", "12:00", "12:30",
+        "13:00", "13:30", "14:00",
+        "14:30", "15:00", "15:30",
+        "16:00", "16:30", "17:00"
+    };
+        foreach(string Time in TimeList)
+        {
         foreach (Tables table in TableTracker)
         {
             // kijk hier na of alle tafles op die tijdstip vol zijn
-            if (ReservationLogic.CheckReservedTable(table.ID, $"{day}/{month}/2024", time))
+            if (ReservationLogic.CheckReservedTable(table.ID, $"{day}/{month}/2024", Time))
             {
                 table.IsReserved();
                 TimeCount++; //checked aantal gereserveerde tafels op die dag
             }
             if (TimeCount >= TableTracker.Count){
-                DisplayDayList.GiveListBasedOnDay(day, month).Remove(time);
+                DisplayDayList.GiveListBasedOnDay(day, month).Remove(Time);
                //Remove from list 
             }
             // if (DayCount >= TableTracker.Count)
             // {
             //     DisplayMonthList.MonthList.Remove(day);
             // } ----> GEBEURD IN DisplayDayList
-
-            switch (time){
-                case "10:00":
-                time = "10:30";
-                break;
-                case "10:30":
-                time = "11:00";
-                break;
-                case "11:00":
-                time = "11:30";
-                break;
-                case "11:30":
-                time = "12:00";
-                break;
-                case "12:00":
-                time = "12:30";
-                break;
-                case "12:30":
-                time = "13:00";
-                break;
-                case "13:00":
-                time = "13:30";
-                break;
-                case "13:30":
-                time = "14:00";
-                break;
-                case "14:30":
-                time = "15:00";
-                break;
-                case "15:00":
-                time = "15:30";
-                break;
-                case "15:30":
-                time = "16:00";
-                break;
-                case "16:00":
-                time = "16:30";
-                break;
-                case "16:30":
-                time = "17:00";
-                break;
-            }
+        }
         }
     }   
 
