@@ -75,6 +75,8 @@ public class Reservation
         // voor tijdstippen moet ik checken of er wel tafels beschikbaar zijn
         string ChosenTime;
         do{
+Console.WriteLine($"Available days for booking are:\n{string.Join(", ", DisplayDayList.GiveListBasedOnDay(ChosenDay, ChosenMonth))}.\nChoose a day.");
+            System.Console.WriteLine("");
             ChosenTime = Console.ReadLine();
         } while (!CheckReservationInfo.CheckTime(ChosenTime));
 
