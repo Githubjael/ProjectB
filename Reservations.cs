@@ -75,8 +75,6 @@ public class Reservation
         // voor tijdstippen moet ik checken of er wel tafels beschikbaar zijn
         string ChosenTime;
         do{
-            Console.WriteLine($"Available time slots for booking are:\n{string.Join(", ", DisplayDayList.DayList)}.\nChoose a time slot.");
-            System.Console.WriteLine("At what time would you wish to come?");
             ChosenTime = Console.ReadLine();
         } while (!CheckReservationInfo.CheckTime(ChosenTime));
 
@@ -137,7 +135,7 @@ public class Reservation
                     _ => "?"
                 };
 
-                var found = ReservedTable.TableTracker.Find(x=>x.Type.Contains(tabletype));
+                var found = ReservedTable.TableTracker.Find(x=>x.Type.Contains(tabletype) && x.Reserved == false);
                 // found.GuestID = guestID;
                 found.Reserved = true;
 
