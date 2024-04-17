@@ -24,10 +24,7 @@ static class ReservedTable
             // Maak hier een functie van in ReservedTable.cs!!!!!!
             List<Tables> ChosenTables = new List<Tables>();
                 int ToBeSeated = AmountOfGuests;
-                List<int> TableTypes = new List<int>()
-                {
-                    Capacity = 2
-                };
+                List<int> TableTypes = new List<int>();
                 // bool Loop = true;
                 int ToReserve;
                 do
